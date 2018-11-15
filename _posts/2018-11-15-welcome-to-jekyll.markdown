@@ -9,6 +9,7 @@ categories: jekyll update
 블로그가 완성.
 
 사진은 이렇게 넣는다네 
+
 ![mage](/images/9ba7f5e6366246c8b85.GIF)
 
 다소 불편함이 따른다.
