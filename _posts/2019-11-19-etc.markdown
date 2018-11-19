@@ -1,0 +1,46 @@
+---
+layout: post
+title:  "SQL 예제.."
+date:   2018-11-19 23:09:16 +0900
+categories: etc
+---
+
+
+* 테이블만 골라서 덤프
+
+mysql의 경우 mysqldump 명령어를 통해 아래와 같이 테이블을 덤프 할 수 있다. (리다이렉션 명령어를 이용)
+
+```sh
+mysqldump -uroot -p sample student score subject > student_score_subject.sql 
+```
+
+
+* student테이블은 모두삭제, subject테이블은 스키마를 남겨두고 레코드만 삭제, score테이블은 레코드만 삭제
+
+테이블 비우기, 삭제 ..
+
+```sql
+drop table student;
+truncate table subject;
+delete from score;
+
+```
+
+
+
+
+* 테이블 복원
+
+```sql
+create database test;
+```
+
+
+```sh
+mysql -uroot -p test < student_score_subject.sql 
+```
+
+```sql
+use test;
+source student_score_subject.sql
+```
