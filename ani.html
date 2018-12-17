@@ -81,9 +81,10 @@
             }
           }
           var p =1;
-          function getpos()
+          function getpos(x)
           {
-            p=p*p+1;
+            p=50*x/100;
+            console.log(p);
             return p;
           }
           function vibrate(elem){
@@ -113,14 +114,16 @@
           function myMove2() {
             var elem = document.getElementById("card"); 
             var pos = -300;
+            var i = 0;
             var id = setInterval(frame, 1000/60);
             function frame() {
-              if (pos == 0) {
+              if (pos >0) {
                 clearInterval(id);
                 vibrate(elem);
 
               } else {
-                pos+=10; 
+                pos+= getpos(i++) ; 
+                console.log(pos);
                 elem.style.top =pos + "px";
               }
             }
