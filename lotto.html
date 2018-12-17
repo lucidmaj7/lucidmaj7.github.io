@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body{
+            background:#ffcccc;
+            margin: 0px;
+            padding: 0px;
+        }
+        .wrapper{
+            width:100%;
+            text-align: center;
+        }
+        h1{
+            color:#6633ff;
+        }
+        .number_area{
+            height: 300px;
+            position: relative;
+        
+        }
+        .number_area:after{
+            content : "";
+            position: absolute;
+            background-image: url("111.png");
+            background-size: 150px 150px;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.5;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            z-index: -1;
+        }
+        #number_list{
+            padding:  0px;
+            position: absolute;
+            list-style-type: none;
+            margin:auto;
+            height: 300px;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            display: flex;
+            flex-direction: row ;
+            justify-content: center;
+            align-items: center;
+            
+        }
+        #number_list li{
+            margin-right: 3px;
+            width:50px;
+            height: 50px;
+            background: coral;
+            border-radius: 50px;
+            color: white;
+            font-size: 20pt;
+            font-weight: 800;
+            line-height: 50px;
+            
+        }
+        #number_list li div{
+            
+            width:45px;
+            height: 45px;
+            border-radius: 45px;
+            background:rgba(255,255,255,0.2);
+          
+            
+        }
+        button{
+            width:200px;
+            height: 40px;;
+            background: #6633ff;
+            color:white;
+            font-weight: 800px;
+            font-size:20pt;
+
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <h1>오늘의 행운 번호</h1>
+        <div class="number_area">
+            <ul id="number_list">
+              
+            </ul>
+        </div>
+        <button onclick="genNumbers()">로또 번호 뽑기</button>
+    </div>
+    <script>
+        
+        function is_already(n,arr)
+        {
+            var bAlready = false;
+            for(var i = 0 ;i<arr.length;i++)
+            {
+                if(arr[i]==n)
+                {
+                    bAlready = true;
+                    break;
+                }
+            }
+            return bAlready;
+
+        }
+        function sleep(ms){
+            ts1 = new Date().getTime() + ms;
+             do ts2 = new Date().getTime(); while (ts2<ts1);
+        }
+        function getLottoArray()
+        {
+
+
+           var numbers = new Array();
+            for(var i = 0; i<6 ;i++)
+            {
+                var  n = Math.floor((Math.random() * 45) + 1);
+                while(is_already(n, numbers))
+                {
+                    n = Math.floor((Math.random() * 45) + 1);
+                }
+                insertBalls(n);
+                
+            }
+            return numbers;
+        }
+        function insertBalls(n)
+        {
+            var innerdiv= document.createElement("div");
+            innerdiv.innerText = n;
+            var listtag= document.createElement("li");
+            
+            listtag.appendChild(innerdiv);
+
+            document.getElementById("number_list").appendChild(listtag);
+             var deg = 0;
+            var id = setInterval(frame, 4);
+            function frame() {
+              if (deg == 360) {
+                clearInterval(id);
+              } else {
+                deg+=3; 
+                listtag.style.transform ="rotate("+ deg + "deg)";
+              }
+            }
+        }
+        function genNumbers()
+        {
+            document.getElementById("number_list").innerHTML="";
+            var count = 1;
+            var numbers = new Array();
+            var id = setInterval(getBall, 1000);
+            
+            function getBall()
+            {
+                if(count>6)
+                 clearInterval(id);
+                 else{
+                    var  n = Math.floor((Math.random() * 45) + 1);
+                    while(is_already(n, numbers))
+                    {
+                        n = Math.floor((Math.random() * 45) + 1);
+                    }
+                    insertBalls(n);
+                    count++;
+                 }
+               
+            }
+            //document.getElementById("number_list").innerHTML("");
+
+        }
+        function myMove() {
+            var elem = document.getElementById("ball"); 
+            var deg = 0;
+            var id = setInterval(frame, 4);
+            function frame() {
+              if (deg == 360) {
+                clearInterval(id);
+              } else {
+                deg+=3; 
+                elem.style.transform ="rotate("+ deg + "deg)";
+              }
+            }
+          }
+    </script>
+</body>
+</html>
