@@ -91,7 +91,7 @@
               
             </ul>
         </div>
-        <button onclick="genNumbers()">로또 번호 뽑기</button>
+        <button id="run_button" onclick="genNumbers()">로또 번호 뽑기</button>
     </div>
     <script>
         
@@ -102,6 +102,7 @@
             {
                 if(arr[i]==n)
                 {
+                    console.log("already exists");
                     bAlready = true;
                     break;
                 }
@@ -150,18 +151,33 @@
               }
             }
         }
+        var running = false;
         function genNumbers()
         {
+            if(running)
+            {   
+                alert("뽑는즁..");
+                return;
+            }
+            running = true;
             document.getElementById("number_list").innerHTML="";
+            document.getElementById("run_button").innerText = "뽑는 중...";
+            document.getElementById("run_button").style.background = "#e0add6";
             var count = 1;
             var numbers = new Array();
             var id = setInterval(getBall, 1000);
-            
+           
             function getBall()
             {
                 if(count>6)
-                 clearInterval(id);
+                 {
+                     clearInterval(id);
+                     running = false;
+                     document.getElementById("run_button").innerText = "로또 번호 뽑기";
+                     document.getElementById("run_button").style.background = "#6633ff";
+                 }
                  else{
+                    
                     var  n = Math.floor((Math.random() * 45) + 1);
                     while(is_already(n, numbers))
                     {
@@ -174,19 +190,7 @@
             }
 
         }
-        function myMove() {
-            var elem = document.getElementById("ball"); 
-            var deg = 0;
-            var id = setInterval(frame, 4);
-            function frame() {
-              if (deg == 360) {
-                clearInterval(id);
-              } else {
-                deg+=3; 
-                elem.style.transform ="rotate("+ deg + "deg)";
-              }
-            }
-          }
+     
     </script>
 </body>
 </html>
