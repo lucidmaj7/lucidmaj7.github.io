@@ -47,6 +47,24 @@
     color:white;
 
 }
+.area3{
+  position: relative;
+  width: 800px;
+  height: 400px;
+  overflow: hidden;
+
+  background: skyblue;
+
+}
+#ball3{
+  position: absolute;
+  width:50px;
+  height:50px;
+
+  border-radius: 50px;
+  background: blue;
+  top:0px;
+}
 
 </style>
 </head>
@@ -66,7 +84,50 @@
             <h1> ㅠㅠㅠ</h1>
         </div>
     </div>
+    <p><button onclick="myMove3()">Click Me3</button></p> 
+    <div class= "area3">
+      <div id= "ball3"></div>
+    </div>
+
+
+    </div>
     <script >
+      function myMove3()
+      {
+        var ballelemnt = document.getElementById ("ball3");
+        var top_pos =0;
+        var i =0;
+        var mul = 1;
+        var l=0;
+        var max_top = 350;
+        var id = setInterval(frame,5);
+        function frame()
+        {
+          console.log(max_top);
+          if(l > 750)
+          {
+            clearInterval(id);
+          }
+          if(top_pos > max_top)
+          {
+             mul = -1;
+             i--;
+           //  
+
+          }else if( top_pos < 10)
+          {  
+            mul =1;
+          
+            i++;
+          }
+            top_pos+= mul * getpos(mul * i);
+            ballelemnt.style.top=top_pos+"px";    
+            l+=0.5;      
+            ballelemnt.style.left=l+"px";   
+        }
+
+
+      }
         function myMove() {
             var elem = document.getElementById("ball"); 
             var deg = 0;
@@ -83,7 +144,7 @@
           var p =1;
           function getpos(x)
           {
-            p=50*x/100;
+            p=9.8*x/100;
             console.log(p);
             return p;
           }
@@ -112,11 +173,14 @@
             }
           }
           function myMove2() {
+
             var elem = document.getElementById("card"); 
+            
             var pos = -300;
             var i = 0;
             var id = setInterval(frame, 1000/60);
             function frame() {
+              
               if (pos >0) {
                 clearInterval(id);
                 vibrate(elem);
