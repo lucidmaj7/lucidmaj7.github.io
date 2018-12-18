@@ -1,0 +1,138 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        
+    </head>
+    <body>
+        <div> 
+            <input type="file" id="file_input" />
+            <button onclick="pe_parse()" id="ok_button">PARSE</button>
+        </div>
+        <div class = "output_wrapper">
+            <div class="dos_header">
+                <h1></h1>
+                
+            </div>
+            <textarea id="pe_out" rows = '30'  cols="100"></textarea>
+        </div>
+        <script>
+
+/*
+typedef unsigned char       uint8 // 8 bit unsigned integer
+typedef          char        int8 // 8 bit signed integer 
+typedef unsigned short     uint16 // 16 bit unsigned integer 
+typedef          short      int16 // 16 bit signed integer 
+typedef unsigned int  	   uint32 // 32 bit unsigned integer 
+typedef          int        int32 // 32 bit signed integer 
+typedef unsigned long 	   uint32 // 32 bit unsigned integer 
+typedef          long       int32 // 32 bit signed integer
+*/
+            function getHexString(n)
+            {
+                var str =  n.toString(16);
+                if (str.length ==1)
+                {
+                    str="0"+ str;
+                }
+                return  str.toUpperCase();
+            }
+            function getDWORDToHexString(dataview,start_offset)
+            {
+                
+                return  getHexString(dataview.getUint8(start_offset+3))+getHexString(dataview.getUint8(start_offset+2))+getHexString(dataview.getUint8(start_offset+1))+ getHexString(dataview.getUint8(start_offset)) ;
+            }
+            function getWordToHexString(dataview,start_offset)
+            {
+                
+                return  getHexString(dataview.getUint8(start_offset+1))+ getHexString(dataview.getUint8(start_offset)) ;
+            }
+
+            function parseDOSHeader(dataview){
+                var dos_header = new Object();
+                dos_header.e_magic =getWordToHexString(dataview, 0);
+                dos_header.e_cblp = getWordToHexString(dataview, 2);
+                dos_header.e_cp = getWordToHexString(dataview, 4);
+                dos_header.e_crlc = getWordToHexString(dataview, 6);
+                dos_header.e_cparhdr = getWordToHexString(dataview, 8);
+                dos_header.e_minalloc = getWordToHexString(dataview, 10);
+                dos_header.e_maxalloc = getWordToHexString(dataview, 12);
+                dos_header.e_ss = getWordToHexString(dataview, 14);
+                dos_header.e_sp = getWordToHexString(dataview, 16);
+                dos_header.e_cscum = getWordToHexString(dataview, 18);
+                dos_header.e_ip = getWordToHexString(dataview, 20);
+                dos_header.e_cs = getWordToHexString(dataview,22);
+                dos_header.e_lfarlc = getWordToHexString(dataview, 24);
+                dos_header.e_ovno = getWordToHexString(dataview, 26);
+                dos_header.e_res = new Array();
+                dos_header.e_res[0] = getWordToHexString(dataview, 28);
+                dos_header.e_res[1]  = getWordToHexString(dataview, 30);
+                dos_header.e_res[2]  = getWordToHexString(dataview, 32);
+                dos_header.e_res[3]  = getWordToHexString(dataview, 34);
+                dos_header.e_oemid  = getWordToHexString(dataview, 36);
+                dos_header.e_oeminfo  = getWordToHexString(dataview, 38);
+                dos_header.e_res2  = new Array();
+                dos_header.e_res2[0] = getWordToHexString(dataview, 40);
+                dos_header.e_res2[1] =getWordToHexString(dataview, 42);
+                dos_header.e_res2[2] =getWordToHexString(dataview, 44);
+                dos_header.e_res2[3] =getWordToHexString(dataview, 46);
+                dos_header.e_res2[4] =getWordToHexString(dataview, 48);
+                dos_header.e_res2[5] =getWordToHexString(dataview, 50);
+                dos_header.e_res2[6] =getWordToHexString(dataview, 52);
+                dos_header.e_res2[7] =getWordToHexString(dataview, 54);
+                dos_header.e_res2[8] =getWordToHexString(dataview, 56);
+                dos_header.e_res2[9] =getWordToHexString(dataview, 58);
+                dos_header.e_lfanew = getDWORDToHexString(dataview, 60);
+                return dos_header;
+            }
+            function parseImageFileHeader(ntHeaderDataview)
+            {
+                var imageFileHeader = new Object();
+                imageFileHeader.Machine = getWordToHexString(ntHeaderDataview,4);
+                imageFileHeader.NumberOfSections = getWordToHexString(ntHeaderDataview,6);
+                imageFileHeader.TimeDataStamp = getDWORDToHexString(ntHeaderDataview,8);
+                imageFileHeader.PointerToSymbolTable = getDWORDToHexString(ntHeaderDataview,12);
+                imageFileHeader.NumberOfSymbols = getDWORDToHexString(ntHeaderDataview,16);
+                imageFileHeader.SizeOfOptionalHeader = getWordToHexString(ntHeaderDataview,20);
+                imageFileHeader.Characteristics = getWordToHexString(ntHeaderDataview,22);
+                return imageFileHeader;
+
+            }
+            function parseNTHeader(dataview)
+            {
+                var NTHeader = new Object();
+                NTHeader.Signature = getDWORDToHexString(dataview,0);
+             
+                NTHeader['image_header']=(  parseImageFileHeader(dataview));
+                return NTHeader;
+
+            }
+            function runParse(data){
+                var pe = new Object();
+                console.log(data.byteLength);
+                var dataView = new DataView(data,0,64);
+                pe['dos_header']  = (  parseDOSHeader(dataView));
+                offsetOfNTHeader = parseInt(   pe['dos_header'] .e_lfanew, 16);
+                dataView = new DataView(data,offsetOfNTHeader,20+224+4);
+                pe['nt_header'] = ( parseNTHeader(dataView));
+
+                console.log(pe);
+                document.getElementById("pe_out").innerHTML=  JSON.stringify(pe);
+            }
+
+
+            function pe_parse()
+            {
+                var fileinput=document.getElementById("file_input");
+               
+                var reader = new FileReader();
+                reader.onload=function()
+                {
+                    runParse ( reader.result);
+                };
+                reader.readAsArrayBuffer(fileinput.files[0]);
+            }
+        
+        </script>
+    </body>
+</html>
+
