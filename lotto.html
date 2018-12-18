@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic" rel="stylesheet">
+    <title>오늘의 행운 번호 - 로또 1등</title>
+    <meta name = "description" content="오늘의 행운번호를 추첨해 드립니다. 로또에 도전하세요!">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-131138212-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-131138212-1');
+</script>
+    <style>
+        body{
+            font-family: 'Nanum Gothic', sans-serif;
+            background:#ffcccc;
+            margin: 0px;
+            padding: 0px;
+        }
+        .wrapper{
+            width:100%;
+            text-align: center;
+        }
+        h1{
+            color:#6633ff;
+        }
+        .number_area{
+            height: 300px;
+            position: relative;
+        
+        }
+        .number_area:after{
+            content : "";
+            position: absolute;
+            background-image: url("111.png");
+            background-size: 150px 150px;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.5;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            z-index: -1;
+        }
+        #number_list{
+            padding:  0px;
+            position: absolute;
+            list-style-type: none;
+            margin:auto;
+            height: 300px;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            display: flex;
+            flex-direction: row ;
+            justify-content: center;
+            align-items: center;
+            
+        }
+        #number_list li{
+            margin-right: 3px;
+            width:50px;
+            height: 50px;
+            background: #0066ff;
+            border-radius: 50px;
+            color: white;
+            font-size: 20pt;
+            font-weight: 800;
+            line-height: 50px;
+            
+        }
+        #number_list li div{
+            
+            width:45px;
+            height: 45px;
+            border-radius: 45px;
+            background:rgba(255,255,255,0.2);
+          
+            
+        }
+        button{
+            width:200px;
+            height: 40px;;
+            background: #6633ff;
+            color:white;
+            font-weight: 800px;
+            border: 0px;
+            font-size:15pt;
+
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <h1>오늘의 행운 번호</h1>
+        <div class="number_area">
+            <ul id="number_list">
+              
+            </ul>
+        </div>
+        <button id="run_button" onclick="genNumbers()">로또 번호 뽑기</button>
+    </div>
+    <script>
+        
+        function is_already(n,arr)
+        {
+            var bAlready = false;
+            for(var i = 0 ;i<arr.length;i++)
+            {
+                if(arr[i]==n)
+                {
+                    console.log("already exists");
+                    bAlready = true;
+                    break;
+                }
+            }
+            return bAlready;
+
+        }
+        function sleep(ms){
+            ts1 = new Date().getTime() + ms;
+             do ts2 = new Date().getTime(); while (ts2<ts1);
+        }
+        function getLottoArray()
+        {
+
+
+           var numbers = new Array();
+            for(var i = 0; i<6 ;i++)
+            {
+                var  n = Math.floor((Math.random() * 45) + 1);
+                while(is_already(n, numbers))
+                {
+                    n = Math.floor((Math.random() * 45) + 1);
+                }
+                insertBalls(n);
+                
+            }
+            return numbers;
+        }
+        function insertBalls(n)
+        {
+            var innerdiv= document.createElement("div");
+            innerdiv.innerText = n;
+            var listtag= document.createElement("li");
+            
+            listtag.appendChild(innerdiv);
+
+            document.getElementById("number_list").appendChild(listtag);
+             var deg = 0;
+            var id = setInterval(frame, 4);
+            function frame() {
+              if (deg == 360) {
+                clearInterval(id);
+              } else {
+                deg+=3; 
+                listtag.style.transform ="rotate("+ deg + "deg)";
+              }
+            }
+        }
+        var running = false;
+        function genNumbers()
+        {
+            if(running)
+            {   
+                alert("뽑는즁..");
+                return;
+            }
+            running = true;
+            document.getElementById("number_list").innerHTML="";
+            document.getElementById("run_button").innerText = "뽑는 중...";
+            document.getElementById("run_button").style.background = "#e0add6";
+            var count = 1;
+            var numbers = new Array();
+            var id = setInterval(getBall, 1000);
+           
+            function getBall()
+            {
+                if(count>6)
+                 {
+                     clearInterval(id);
+                     running = false;
+                     document.getElementById("run_button").innerText = "로또 번호 뽑기";
+                     document.getElementById("run_button").style.background = "#6633ff";
+                 }
+                 else{
+                    
+                    var  n = Math.floor((Math.random() * 45) + 1);
+                    while(is_already(n, numbers))
+                    {
+                        n = Math.floor((Math.random() * 45) + 1);
+                    }
+                    insertBalls(n);
+                    count++;
+                 }
+               
+            }
+
+        }
+     
+    </script>
+</body>
+</html>
