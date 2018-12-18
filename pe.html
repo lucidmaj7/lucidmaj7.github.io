@@ -2,12 +2,18 @@
 <html>
     <head>
         <style>
-            .dos_header{
+            .headers{
                 width:350px;
-                background: rebeccapurple;
+        
                 color:white;
                 border:solid 1px black;
                 padding: 0px;
+            }
+            #dos_header{
+                background: rebeccapurple;
+            }
+            #nt_header{
+                background: green;
             }
             .word_field{
                 display: inline-block;
@@ -40,9 +46,11 @@
             <textarea id="pe_out" rows = '10'  cols="80"></textarea>
         </div>
         <div class = "output_wrapper">
-            <div class="dos_header" id = "dos_header">
+            <div class="headers" id = "dos_header">
                 <h1>IMAGE_DOS_HEADER</h1>
-
+            </div>
+            <div class="headers" id = "nt_header">
+                <h1>IMAGE_NT_HEADER</h1>
             </div>
         
         </div>
@@ -84,6 +92,23 @@ typedef          long       int32 // 32 bit signed integer
                         document.getElementById("dos_header").innerHTML +=  "<div class='dword_field'>"+key+" : "+pe.dos_header[key]+ "</div>";
                     }
                 }
+
+                //pe.ntheader
+                document.getElementById("nt_header").innerHTML +=  "<div class='dword_field'> Signature : "+pe.nt_header.Signature+ "</div>";
+                imagefile_headerElement= document.createElement("div");
+                imagefile_headerElement.setAttribute("class" , "headers");
+                imagefile_headerElement.setAttribute("id", "file_header");
+                document.getElementById("nt_header").appendChild(imagefile_headerElement);
+
+                for(var key in pe.nt_header.imageFileHeader)
+                {
+                    if(pe.nt_header.imageFileHeader[key].length ==4)
+                    {
+                        imagefile_headerElement.innerHTML +=  "<div class='word_field'>"+pe.nt_header.imageFileHeader[key]+ "</div>";
+                    }
+                    
+                }
+               
 
             }
             function getDWORDToHexString(dataview,start_offset)
