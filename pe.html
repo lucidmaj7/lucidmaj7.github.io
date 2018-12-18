@@ -1,20 +1,48 @@
 <!DOCTYPE HTML>
 <html>
     <head>
-        
+        <style>
+            .dos_header{
+                width:350px;
+                background: rebeccapurple;
+                color:white;
+                border:solid 1px black;
+                padding: 0px;
+            }
+            .word_field{
+                display: inline-block;
+                height: 20px;
+                width:150px;
+                color:black;
+                background: yellow;
+                margin: 2px;
+            }
+            .dword_field{
+                display: inline-block;
+                height: 20px;
+                color:black;
+                width:300px;
+                background: pink;
+                margin: 2px;
+            }
+            #pe_out{
+                display: none;
+            }
+        </style>
     </head>
     <body>
         <div> 
             <h1> PE Parser .js</h1>
             <input type="file" id="file_input" />
             <button onclick="pe_parse()" id="ok_button">PARSE</button>
+            <textarea id="pe_out" rows = '10'  cols="80"></textarea>
         </div>
         <div class = "output_wrapper">
-            <div class="dos_header">
-                <h1></h1>
-                
+            <div class="dos_header" id = "dos_header">
+                <h1>IMAGE_DOS_HEADER</h1>
+
             </div>
-            <textarea id="pe_out" rows = '30'  cols="100"></textarea>
+        
         </div>
         <script>
 
@@ -36,6 +64,25 @@ typedef          long       int32 // 32 bit signed integer
                     str="0"+ str;
                 }
                 return  str.toUpperCase();
+            }
+            function render(pe)
+            {
+                //pe.dos_header
+                for( var key in pe.dos_header ){
+                    if(Array.isArray(pe.dos_header[key]))
+                    {
+                        for(var i =0; i<pe.dos_header[key].length ;i++)
+                        {
+                            document.getElementById("dos_header").innerHTML +=  "<div class='word_field'>"+key+"["+i+"] : "+pe.dos_header[key][i]+ "</div>";
+                        }
+                    }else {
+                        if(pe.dos_header[key].length==4)
+                            document.getElementById("dos_header").innerHTML +=  "<div class='word_field'>"+key+" : "+pe.dos_header[key]+ "</div>";
+                        else
+                        document.getElementById("dos_header").innerHTML +=  "<div class='dword_field'>"+key+" : "+pe.dos_header[key]+ "</div>";
+                    }
+                }
+
             }
             function getDWORDToHexString(dataview,start_offset)
             {
@@ -118,6 +165,7 @@ typedef          long       int32 // 32 bit signed integer
 
                 console.log(pe);
                 document.getElementById("pe_out").innerHTML=  JSON.stringify(pe);
+                render(pe);
             }
 
 
