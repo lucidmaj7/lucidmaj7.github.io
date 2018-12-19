@@ -2,6 +2,9 @@
 <html>
     <head>
         <style>
+            h1{
+                font-size: 15px;
+            }
             .headers{
                 width:350px;
         
@@ -22,6 +25,7 @@
                 color:black;
                 background: yellow;
                 margin: 2px;
+                font-size: 9pt;
             }
             .dword_field{
                 display: inline-block;
@@ -30,6 +34,11 @@
                 width:300px;
                 background: pink;
                 margin: 2px;
+                font-size: 9pt;
+            }
+            #file_header{
+                width:320px;
+                background: brown;
             }
             #pe_out{
                 display: none;
@@ -78,6 +87,10 @@ typedef          long       int32 // 32 bit signed integer
             function render(pe)
             {
                 //pe.dos_header
+                document.getElementById("dos_header").innerHTML="";
+                titleElement = document.createElement("h1");
+                titleElement.innerHTML="DOS_HEADER";
+                document.getElementById("dos_header").appendChild( titleElement);
                 for( var key in pe.dos_header ){
                     if(Array.isArray(pe.dos_header[key]))
                     {
@@ -94,17 +107,45 @@ typedef          long       int32 // 32 bit signed integer
                 }
 
                 //pe.ntheader
+             
+                document.getElementById("nt_header").innerHTML ="";
+                titleElement = document.createElement("h1");
+                titleElement.innerHTML="NT_HEADER";
+                document.getElementById("nt_header").appendChild( titleElement);
                 document.getElementById("nt_header").innerHTML +=  "<div class='dword_field'> Signature : "+pe.nt_header.Signature+ "</div>";
                 imagefile_headerElement= document.createElement("div");
                 imagefile_headerElement.setAttribute("class" , "headers");
                 imagefile_headerElement.setAttribute("id", "file_header");
+               
+                titleElement = document.createElement("h1");
+                titleElement.innerHTML="File_HEADER";
+                imagefile_headerElement.appendChild( titleElement);
+
                 document.getElementById("nt_header").appendChild(imagefile_headerElement);
 
-                for(var key in pe.nt_header.imageFileHeader)
+           
+                for(var key in pe.nt_header.image_header)
                 {
-                    if(pe.nt_header.imageFileHeader[key].length ==4)
+                    if(pe.nt_header.image_header[key].length ==4)
                     {
-                        imagefile_headerElement.innerHTML +=  "<div class='word_field'>"+pe.nt_header.imageFileHeader[key]+ "</div>";
+                        console.log(pe.nt_header.image_header[key]);
+                        if(key =="Machine" )
+                        { 
+                            var MachineType ="";
+                            if(pe.nt_header.image_header[key] =="014C")
+                                MachineType= "x86";
+                            else if(pe.nt_header.image_header[key] =="0200")
+                                  MachineType= "Intel Itanium";
+                            else if(pe.nt_header.image_header[key] =="8664")
+                                  MachineType= "x64";
+                            imagefile_headerElement.innerHTML +=  "<div class='word_field'>"+key + " : "+ MachineType+" ("+pe.nt_header.image_header[key]+ ")</div>";
+                        }
+                      else{
+                            imagefile_headerElement.innerHTML +=  "<div class='word_field'>"+key + " : "+pe.nt_header.image_header[key]+ "</div>";
+                        }
+                    }else if(pe.nt_header.image_header[key].length ==8)
+                    {
+                        imagefile_headerElement.innerHTML +=  "<div class='dword_field'>"+key + " : "+pe.nt_header.image_header[key]+ "</div>";
                     }
                     
                 }
@@ -177,7 +218,7 @@ typedef          long       int32 // 32 bit signed integer
                 var NTHeader = new Object();
                 NTHeader.Signature = getDWORDToHexString(dataview,0);
              
-                NTHeader['image_header']=(  parseImageFileHeader(dataview));
+                NTHeader['image_header']=  parseImageFileHeader(dataview);
                 return NTHeader;
 
             }
