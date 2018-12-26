@@ -3,20 +3,63 @@
 <head>
     <!-- link rel="stylesheet" type="text/css" href="style/style.css" -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<style>
+		body{
+			margin:0; padding:0;
+			 background-image:url("https://loremflickr.com/720/1280");
+			background-size: 100%;
+
+		}
+		.wrapper{
+
+			width:100%;
+			height:100%;
+			padding 30px;
+			text-align:center;
+			position:relative;	
+		}
+		.paragraph{
+			display:block;
+			position:absolute;
+			margin:auto;
+			top:0;
+			bottom:0;
+			left:0;
+			right:0;
+			height:30%;
+			mix-blend-mode: exclusion;
+			color: white;
+			 
+			 text-align: center;
+			 font-size: 6vw;
+		}
+	</style>
+	<meta name="viewport" content="width=device-width, user-scalable=no">
 </head>
 <body>
     <script></script>
     <div class="wrapper">
-        <h1 class="paragraph">hello bible</h1>
+        <h1 class="paragraph">loading...</h1>
     </div>
     <script>
     window.onload = function() { 
-        var random = Math.floor((Math.random() *2) + 1); 
-        $.get( "paragraph/"+random+".json", function( data ) {
-            $( ".paragraph" ).html( data );
-          // alert( "Load was performed." );
-        });
+	console.log("adsfdsa");
+       	
+	 var random = Math.floor((Math.random() *4) + 1); 
+	
+	console.log("dsfdf");
        // $(".paragraph").html("ㅠㅠㅠ");
+
+	$.ajax({
+	  dataType: "json",
+	  url: "paragraph/"+random+".json",
+	  success: function(data){
+		var json=data;
+		console.log(JSON.stringify(json.paragraph));
+		$(".paragraph").html(json.paragraph);
+	}
+	});
+	
      }
 
    
