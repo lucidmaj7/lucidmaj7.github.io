@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <!-- link rel="stylesheet" type="text/css" href="style/style.css" -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+    <script></script>
+    <div class="wrapper">
+        <h1 class="paragraph">hello bible</h1>
+    </div>
+    <script>
+    window.onload = function() { 
+        var random =  (Math.random() * 1)+1; 
+        $.get( "paragraph/"+random+".json", function( data ) {
+            $( ".paragraph" ).html( data );
+          // alert( "Load was performed." );
+        });
+       // $(".paragraph").html("ㅠㅠㅠ");
+     }
+
+   
+    
+    </script>
+</body>
+</html>
