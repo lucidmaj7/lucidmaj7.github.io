@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Static Gradient Generator</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 20px;
+      background-color: #222;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+    .controls {
+      margin-bottom: 20px;
+    }
+    label {
+      margin-right: 8px;
+    }
+    input {
+      margin-left: 8px;
+      padding: 4px;
+    }
+    button {
+      padding: 6px 12px;
+      margin-left: 8px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    canvas {
+      display: block;
+      margin: 20px auto;
+      background: #000;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+  </style>
+</head>
+<body>
+  <div class="controls">
+    <h1>정적 그라디언트 생성기</h1>
+    <p>랜덤 색상으로 그라디언트를 생성하고 JPG로 저장합니다.</p>
+    <p>입자 크기와 각도를 조정하여 다양한 효과를 실험해보세요.</p>
+    <p>최대 20단계의 색상과 10단계의 입자 크기를 지원합니다.</p>
+    <p>해상도는 기본적으로 1920x1080으로 설정되어 있습니다.</p>
+    <p>각도는 0도에서 360도까지 설정할 수 있습니다.</p>
+    <!-- 해상도 설정 -->
+    <label for="resolution">해상도 (너비 x 높이):</label>
+    <input type="text" id="resolution" value="1920x1080">
+
+    <!-- 색상 수 설정 -->
+    <label for="colors">색상 단계:</label>
+    <input type="number" id="colors" value="5" min="2" max="20">
+
+    <!-- 입자 굵기 설정 -->
+    <label for="grainSize">입자 굵기:</label>
+    <input type="number" id="grainSize" value="1" min="1" max="10">
+
+    <!-- 각도 설정 -->
+    <label for="angle">그라디언트 각도 (0~360):</label>
+    <input type="number" id="angle" value="45" min="0" max="360">
+
+    <!-- 버튼들 -->
+    <button onclick="generateGradient()">그라디언트 생성</button>
+    <button onclick="downloadImage()">JPG 저장</button>
+  </div>
+
+  <canvas id="canvas"></canvas>
+
+  <script>
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+
+    // 기본값
+    let resolution = [1920, 1080]; // 기본 해상도
+    let colorCount = 5; // 색상 단계 기본값
+    let grainSize = 1; // Grain 기본 크기
+    let angle = 45; // 기본 각도 (45°)
+
+    // 캔버스 크기 설정
+    function resizeCanvas(width, height) {
+      canvas.width = width;
+      canvas.height = height;
+    }
+
+    // 랜덤 색상을 생성하는 함수
+    function generateRandomColors(count) {
+      const colors = [];
+      for (let i = 0; i < count; i++) {
+        const r = Math.floor(Math.random() * 255);
+        const g = Math.floor(Math.random() * 255);
+        const b = Math.floor(Math.random() * 255);
+        colors.push(`rgb(${r},${g},${b})`);
+      }
+      return colors;
+    }
+
+    // 사용자 지정 각도를 기준으로 계산된 그라디언트를 생성하는 함수
+    function generateGradient() {
+      // 사용자 입력값 가져오기
+      const resolutionInput = document.getElementById('resolution').value;
+      const colorsInput = document.getElementById('colors').value;
+      const grainInput = document.getElementById('grainSize').value;
+      const angleInput = document.getElementById('angle').value;
+
+      // 입력값 파싱
+      const [width, height] = resolutionInput.split('x').map(Number);
+      resolution = [width || 1920, height || 1080];
+      colorCount = Math.max(2, Math.min(Number(colorsInput), 20)); // 최소 2, 최대 20
+      grainSize = Math.min(Math.max(Number(grainInput), 1), 10); // 최소 1, 최대 10
+      angle = Math.min(Math.max(Number(angleInput), 0), 360); // 각도는 0~360 사이
+
+      // 캔버스 크기 설정
+      resizeCanvas(resolution[0], resolution[1]);
+
+      // 랜덤 색상 생성
+      const colors = generateRandomColors(colorCount);
+
+      // 각도를 이용한 그라디언트 방향 계산
+      const radians = (angle * Math.PI) / 180; // 각도를 라디안으로 변환
+      const x0 = canvas.width / 2 - (canvas.width / 2) * Math.cos(radians);
+      const y0 = canvas.height / 2 - (canvas.height / 2) * Math.sin(radians);
+      const x1 = canvas.width / 2 + (canvas.width / 2) * Math.cos(radians);
+      const y1 = canvas.height / 2 + (canvas.height / 2) * Math.sin(radians);
+
+      // 그라디언트 생성
+      const gradient = ctx.createLinearGradient(x0, y0, x1, y1);
+      const step = 1 / (colors.length - 1);
+      colors.forEach((color, index) => {
+        gradient.addColorStop(index * step, color);
+      });
+
+      // 캔버스에 그라디언트 그리기
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // Grain 효과 추가
+      generateGrain();
+    }
+
+    // Grain 효과 추가
+    function generateGrain() {
+      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      const data = imageData.data;
+
+      // Grain 추가
+      for (let i = 0; i < data.length; i += 4 * grainSize) { // 입자 크기를 grainSize로 설정
+        const grain = Math.random() * 40 - 20; // -20 ~ 20 범위
+        data[i] += grain; // R
+        data[i + 1] += grain; // G
+        data[i + 2] += grain; // B
+      }
+
+      // 업데이트된 이미지 데이터 적용
+      ctx.putImageData(imageData, 0, 0);
+    }
+
+    // 이미지 저장
+    function downloadImage() {
+      const link = document.createElement('a');
+      link.download = 'gradient.jpg';
+      link.href = canvas.toDataURL('image/jpeg');
+      link.click();
+    }
+
+    // 초기 그라디언트 생성
+    generateGradient();
+  </script>
+</body>
+</html>
