@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SokuLog - Record Your Speed</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            padding: 30px 0;
+            position: relative;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 32px;
+            font-weight: 800;
+            letter-spacing: -1px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero {
+            padding: 100px 0 150px;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 72px;
+            font-weight: 900;
+            margin-bottom: 30px;
+            line-height: 1.1;
+            background: linear-gradient(135deg, #ffffff 0%, #a8b2ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero p {
+            font-size: 24px;
+            margin-bottom: 50px;
+            color: #b8c5ff;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 20px 50px;
+            font-size: 20px;
+            font-weight: 700;
+            color: #fff;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.4);
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 30px 60px rgba(102, 126, 234, 0.6);
+        }
+
+        .features {
+            padding: 100px 0;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+        }
+
+        .features h2 {
+            text-align: center;
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 80px;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .feature-card {
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(102, 126, 234, 0.5);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .feature-card h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #a8b2ff;
+        }
+
+        .feature-card p {
+            color: #b8c5ff;
+            line-height: 1.6;
+        }
+
+        .stats {
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 60px;
+            margin-top: 60px;
+        }
+
+        .stat-item h3 {
+            font-size: 56px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+
+        .stat-item p {
+            font-size: 18px;
+            color: #b8c5ff;
+        }
+
+        .demo {
+            padding: 100px 0;
+            background: rgba(255, 255, 255, 0.03);
+            text-align: center;
+        }
+
+        .demo h2 {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 30px;
+        }
+
+        .demo p {
+            font-size: 20px;
+            color: #b8c5ff;
+            margin-bottom: 50px;
+        }
+
+        .phone-mockup {
+            max-width: 400px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 40px;
+            padding: 20px;
+            box-shadow: 0 40px 80px rgba(102, 126, 234, 0.4);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .phone-screen {
+            background: #1a1a2e;
+            border-radius: 30px;
+            padding: 40px 20px;
+            min-height: 600px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .screenshot-carousel {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            min-height: 520px; /* 600px (phone-screen) - 80px (padding) */
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .screenshot {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .screenshot.active {
+            opacity: 1;
+        }
+
+        .carousel-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.3);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 20px;
+            z-index: 10;
+            line-height: 1;
+        }
+
+        .carousel-button:hover {
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+
+        .carousel-button.prev {
+            left: 30px;
+        }
+
+        .carousel-button.next {
+            right: 30px;
+        }
+
+        .speed-display {
+            font-size: 120px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+
+        .speed-unit {
+            font-size: 24px;
+            color: #667eea;
+            margin-bottom: 40px;
+        }
+
+        .trip-info {
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            margin-top: 40px;
+        }
+
+        .trip-stat {
+            text-align: center;
+        }
+
+        .trip-stat-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: #a8b2ff;
+            margin-bottom: 5px;
+        }
+
+        .trip-stat-label {
+            font-size: 14px;
+            color: #667eea;
+        }
+
+        footer {
+            padding: 60px 0;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        footer p {
+            color: #b8c5ff;
+            font-size: 16px;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 48px;
+            }
+
+            .hero p {
+                font-size: 18px;
+            }
+
+            .features h2, .demo h2 {
+                font-size: 36px;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .speed-display {
+                font-size: 80px;
+            }
+        }
+
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(102, 126, 234, 0.5);
+            border-radius: 50%;
+            animation: rise 10s infinite ease-in;
+        }
+
+        @keyframes rise {
+            0% {
+                bottom: -10%;
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                bottom: 110%;
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="particles" id="particles"></div>
+
+    <header>
+        <div class="container">
+            <div class="logo">SokuLog</div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Record<br>Your Speed</h1>
+            <p>GPS-based Speedometer & Trip Logger<br>Perfectly track every journey</p>
+            <a href="#" class="cta-button">Download on the App Store</a>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="container">
+            <h2>Powerful Features</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <span class="feature-icon">⚡</span>
+                    <h3>Real-time Speed Tracking</h3>
+                    <p>Accurately records all your movements with precise real-time speed tracking using GPS.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">📍</span>
+                    <h3>Precise Location Tracking</h3>
+                    <p>Accurately records and visualizes your route with high-precision GPS technology.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">📊</span>
+                    <h3>Trip Log Saving</h3>
+                    <p>Automatically saves all your trip data, allowing you to review past records at any time.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">🚴</span>
+                    <h3>Supports Various Activities</h3>
+                    <p>Perfectly tracks all types of activities like cycling, driving, and running.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">📈</span>
+                    <h3>Statistics & Analysis</h3>
+                    <p>Check detailed statistics like average speed, max speed, and distance at a glance.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">🎨</span>
+                    <h3>Intuitive UI</h3>
+                    <p>Experience a beautiful and easy-to-use interface built with SwiftUI.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="stats">
+        <div class="container">
+            <h2>Better Records with SokuLog</h2>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h3>99.9%</h3>
+                    <p>GPS Accuracy</p>
+                </div>
+                <div class="stat-item">
+                    <h3>0.1s</h3>
+                    <p>Real-time Updates</p>
+                </div>
+                <div class="stat-item">
+                    <h3>Unlimited</h3>
+                    <p>Trip Log Storage</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="demo">
+        <div class="container">
+            <h2>Clean and Powerful Interface</h2>
+            <p>Provides all the necessary information without being complicated.</p>
+            <div class="phone-mockup">
+                <div class="phone-screen">
+                    <div class="screenshot-carousel">
+                        <img src="screenshot1.png" class="screenshot active" alt="SokuLog Screenshot 1">
+                        <img src="screenshot2.png" class="screenshot" alt="SokuLog Screenshot 2">
+                        <img src="screenshot3.png" class="screenshot" alt="SokuLog Screenshot 3">
+                        <img src="screenshot4.png" class="screenshot" alt="SokuLog Screenshot 4">
+                    </div>
+                    <button class="carousel-button prev">&lt;</button>
+                    <button class="carousel-button next">&gt;</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="hero" style="padding: 100px 0;">
+        <div class="container">
+            <h2 style="font-size: 48px; margin-bottom: 30px;">Get Started Now</h2>
+            <p style="font-size: 20px; margin-bottom: 40px;">Take SokuLog on all your journeys.</p>
+            <a href="#" class="cta-button">Download for Free</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 SokuLog. All rights reserved. | <a href="privacy-en.html" style="color: #a8b2ff;">Privacy & Terms</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // Particle creation
+        const particlesContainer = document.getElementById('particles');
+        for (let i = 0; i < 50; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 10 + 's';
+            particle.style.animationDuration = (Math.random() * 5 + 5) + 's';
+            particlesContainer.appendChild(particle);
+        }
+
+        // Carousel Logic
+        const carouselContainer = document.querySelector('.phone-screen');
+        if (carouselContainer) {
+            const screenshots = carouselContainer.querySelectorAll('.screenshot');
+            const prevButton = carouselContainer.querySelector('.carousel-button.prev');
+            const nextButton = carouselContainer.querySelector('.carousel-button.next');
+            let currentScreenshot = 0;
+
+            function showScreenshot(index) {
+                screenshots.forEach((screenshot, i) => {
+                    screenshot.classList.toggle('active', i === index);
+                });
+            }
+
+            if (screenshots.length > 1 && prevButton && nextButton) {
+                nextButton.addEventListener('click', () => {
+                    currentScreenshot = (currentScreenshot + 1) % screenshots.length;
+                    showScreenshot(currentScreenshot);
+                });
+
+                prevButton.addEventListener('click', () => {
+                    currentScreenshot = (currentScreenshot - 1 + screenshots.length) % screenshots.length;
+                    showScreenshot(currentScreenshot);
+                });
+            } else if (prevButton && nextButton) {
+                prevButton.style.display = 'none';
+                nextButton.style.display = 'none';
+            }
+        }
+
+        // Scroll animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 1s ease-out forwards';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.feature-card, .stat-item').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
