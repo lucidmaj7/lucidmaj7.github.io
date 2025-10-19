@@ -1,1 +1,199 @@
-<!doctype html><html lang="ko"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="google-site-verification" content="dQVgoLJ1VP4A5vUKf1x5nbFTSqTJ8AF6Xi7tf6Hy0hI"/><meta name="theme-color" content="#000000"/><meta name="모두의 계산기" content="물타기계산기,BMI계산기"/><script async src="https://www.googletagmanager.com/gtag/js?id=G-68BY70HJY3"></script><script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-68BY70HJY3")</script><script type="text/javascript">!function(n){if("/"===n.search[1]){var a=n.search.slice(1).split("&").map((function(n){return n.replace(/~and~/g,"&")})).join("?");window.history.replaceState(null,null,n.pathname.slice(0,-1)+a+n.hash)}}(window.location)</script><link rel="apple-touch-icon" href="/logo192.png"/><link rel="manifest" href="/manifest.json"/><title>물타기 계산기</title><script defer="defer" src="/static/js/main.3cecc14c.js"></script></head><body><div id="root"></div></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lucidmaj7’s Apps</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #ffffff;
+            color: #1d1d1f;
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 120px 0 80px;
+        }
+
+        .hero h1 {
+            font-size: 56px;
+            font-weight: 600;
+            letter-spacing: -0.005em;
+            margin: 0 0 15px;
+        }
+
+        .hero p {
+            font-size: 24px;
+            font-weight: 400;
+            color: #86868b;
+            max-width: 680px;
+            margin: 0 auto;
+            line-height: 1.4;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            padding-bottom: 120px;
+        }
+
+        .project-card {
+            background-color: #f5f5f7;
+            border-radius: 18px;
+            text-decoration: none;
+            color: #1d1d1f;
+            transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                        box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .project-card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.12);
+        }
+
+        .card-content {
+            padding: 40px 30px 0;
+        }
+
+        .card-content .tagline {
+            font-size: 17px;
+            font-weight: 600;
+            color: #0071e3;
+            margin: 0;
+        }
+
+        .card-content h2 {
+            font-size: 32px;
+            font-weight: 600;
+            margin: 5px 0 10px;
+        }
+
+        .card-content p {
+            font-size: 17px;
+            color: #86868b;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        .card-image {
+            margin-top: 30px;
+            height: 300px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+        }
+
+        .card-image img {
+            max-width: 90%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+        
+        .july-icon {
+            width: 120px;
+            height: 120px;
+            border-radius: 27px;
+            margin-bottom: 90px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .sokulog-screenshot {
+             max-width: 55%;
+             border-radius: 20px;
+             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .compass-icon {
+            font-size: 100px;
+            font-weight: 500;
+            color: #0071e3;
+            margin-bottom: 90px;
+        }
+
+        footer {
+            background-color: #f5f5f7;
+            text-align: center;
+            padding: 40px 20px;
+            color: #86868b;
+            font-size: 14px;
+        }
+        
+        footer a {
+            color: #515154;
+            text-decoration: none;
+        }
+        
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .hero { padding: 80px 0 60px; }
+            .hero h1 { font-size: 40px; }
+            .hero p { font-size: 19px; }
+            .projects-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header class="hero">
+            <h1>Designed for life.</h1>
+            <p>Discover apps that are thoughtfully crafted to be useful, intuitive, and beautiful.</p>
+        </header>
+
+        <main class="projects-grid">
+            <a href="/compass/" class="project-card">
+                <div class="card-content">
+                    <p class="tagline">Compass Polar</p>
+                    <h2>Navigate the future.</h2>
+                    <p>Sci-fi design meets precision navigation.</p>
+                </div>
+                <div class="card-image">
+                    <div class="compass-icon">◈</div>
+                </div>
+            </a>
+            <a href="/sokulog/" class="project-card">
+                <div class="card-content">
+                    <p class="tagline">SokuLog</p>
+                    <h2>Track every journey.</h2>
+                    <p>A GPS speedometer and trip logger for all your adventures.</p>
+                </div>
+                <div class="card-image">
+                    <img src="/sokulog/screenshot1.png" alt="SokuLog Screenshot" class="sokulog-screenshot">
+                </div>
+            </a>
+            <a href="/july/" class="project-card">
+                <div class="card-content">
+                    <p class="tagline">July</p>
+                    <h2>Film-inspired photos.</h2>
+                    <p>Capture moments with the beauty of analog film filters.</p>
+                </div>
+                <div class="card-image">
+                    <img src="/july/images/app-icon.png" alt="July App Icon" class="july-icon">
+                </div>
+            </a>
+        </main>
+    </div>
+    
+    <footer>
+        <p>&copy; 2025 lucidmaj7. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
