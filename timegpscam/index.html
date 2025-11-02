@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TimeGPSCam++ - Photo Watermark with Date Time GPS</title>
+    <link rel="icon" type="image/png" href="icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=VT323&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-main: #1A031F;
+            --bg-card: #2A1A3F;
+            --text-primary: #C7CCE3;
+            --text-secondary: rgba(199, 204, 227, 0.7);
+            --accent: #EB8800;
+            --border: #3A2A4F;
+            --font-pixel: 'VT323', monospace;
+            --font-sans: 'Inter', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: var(--font-sans);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        header {
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .header-icon {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 1.5rem;
+            border-radius: 18px;
+        }
+
+        header h1 {
+            font-family: var(--font-pixel);
+            font-size: 3rem;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+            font-weight: 400;
+        }
+
+        header .subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+        }
+
+        .section {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        h2 {
+            font-family: var(--font-pixel);
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+        }
+
+        p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            max-width: 75ch;
+        }
+
+        .hero {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        .hero-text {
+            flex: 1;
+        }
+        
+        .hero-text p {
+            font-size: 1.1rem;
+            color: var(--text-primary);
+        }
+
+        .hero-image {
+            flex: 1;
+            max-width: 300px;
+        }
+
+        .hero-image img {
+            width: 100%;
+            border-radius: 12px;
+            border: 2px solid var(--border);
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--accent);
+            color: var(--bg-main);
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-top: 1rem;
+            transition: transform 0.2s ease;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-item {
+            background-color: var(--bg-main);
+            padding: 1.5rem;
+            border-radius: 12px;
+        }
+
+        .feature-item h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .themes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .theme-item {
+            text-align: center;
+        }
+
+        .theme-item img {
+            width: 100%;
+            max-width: 250px;
+            border-radius: 12px;
+            border: 2px solid var(--border);
+            margin-bottom: 1rem;
+        }
+
+        .theme-item h3 {
+            font-family: var(--font-pixel);
+            font-size: 1.5rem;
+            color: var(--accent);
+            font-weight: 400;
+        }
+
+        .how-to-list {
+            list-style: none;
+            counter-reset: how-to-counter;
+            padding-left: 2rem;
+        }
+
+        .how-to-list li {
+            counter-increment: how-to-counter;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .how-to-list li::before {
+            content: counter(how-to-counter);
+            font-family: var(--font-pixel);
+            font-size: 1.5rem;
+            color: var(--accent);
+            position: absolute;
+            left: -2.5rem;
+            top: -0.25rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem 0;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+            }
+            .hero-image {
+                max-width: 100%;
+            }
+            .section {
+                padding: 2rem;
+            }
+            h1 {
+                font-size: 2.5rem;
+            }
+            h2 {
+                font-size: 2rem;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <img src="icon.png" alt="TimeGPSCam++ App Icon" class="header-icon">
+            <h1>TimeGPSCam++</h1>
+            <p class="subtitle">Photo Watermark with Date Time GPS</p>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <section class="section hero">
+            <div class="hero-text">
+                <h2>Professional documentation in your pocket.</h2>
+                <p>Turn your iPhone into a professional documentation camera. TimeGPSCam++ automatically stamps every photo with date, time, GPS location, and address—perfect for real estate, construction, delivery proof, and business documentation.</p>
+                <a href="#" class="cta-button">Download on the App Store</a>
+            </div>
+            <div class="hero-image">
+                <img src="screenshot1.png" alt="App Screenshot">
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Key Features</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <h3>Automatic Watermark</h3>
+                    <p>Record exact shooting time, GPS coordinates, and address instantly.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>4 Retro Themes</h3>
+                    <p>Choose from Default, Retro LED, VCR, and Pixel styles for a unique look.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Flexible Settings</h3>
+                    <p>Toggle elements, change formats, adjust position, and more.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Convenient Camera</h3>
+                    <p>Pinch to zoom, tap to focus, flash control, and front/rear camera switch.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Photo Management</h3>
+                    <p>Preview after capture, view photos in the in-app gallery, and auto-save.</p>
+                </div>
+                 <div class="feature-item">
+                    <h3>Privacy First</h3>
+                    <p>All photos and location data are stored only on your device.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>4 Retro Themes</h2>
+            <div class="themes-grid">
+                <div class="theme-item">
+                    <img src="../timestampcam/images/mock_preview2.png" alt="Retro LED Theme">
+                    <h3>Retro LED</h3>
+                    <p>Orange glow effect with a 7-segment display feel.</p>
+                </div>
+                <div class="theme-item">
+                    <img src="../timestampcam/images/mock_preview3.png" alt="VCR Theme">
+                    <h3>VCR</h3>
+                    <p>Old camcorder screen style for a nostalgic vibe.</p>
+                </div>
+                <div class="theme-item">
+                    <img src="../timestampcam/images/mock_preview4.png" alt="Pixel Theme">
+                    <h3>Pixel</h3>
+                    <p>Retro gaming feel with a classic pixel font.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>How to Use</h2>
+            <ol class="how-to-list">
+                <li>Launch the app and allow camera and location permissions.</li>
+                <li>Select your preferred watermark theme and settings.</li>
+                <li>Tap the shutter button to take a photo.</li>
+                <li>Time and location are automatically recorded on your photo!</li>
+            </ol>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>If you have any questions or suggestions, please feel free to leave a review on the App Store or email the developer.</p>
+            <p><a href="privacy-en.html">Terms & Conditions</a> | &copy; 2025 TimeGPSCam++. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
