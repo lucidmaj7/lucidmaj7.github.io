@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Git Client - A lightweight, powerful cross-platform Git client with beautiful macOS-style UI. Built with Tauri, React, and Rust.">
+    <meta name="keywords" content="git, git client, sourcetree alternative, tauri, rust, version control, gui, macos">
+    <title>Git Client - Lightweight Cross-Platform Git GUI</title>
+    <link rel="icon" href="icon.png">
+    <style>
+        :root {
+            --primary: #4A90D9;
+            --primary-light: #EBF3FC;
+            --background: #f8f8fa;
+            --card: #ffffff;
+            --foreground: #1d1d1f;
+            --muted: #86868b;
+            --border: #e5e5e7;
+            --accent-green: #28c840;
+            --accent-yellow: #febc2e;
+            --accent-red: #ff5f57;
+            --git-added: #34c759;
+            --git-modified: #ff9f0a;
+            --git-deleted: #ff3b30;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', system-ui, sans-serif;
+            background: var(--background);
+            color: var(--foreground);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Nav */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(248, 248, 250, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            padding: 12px 0;
+            z-index: 100;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 17px;
+            font-weight: 600;
+            color: var(--foreground);
+            text-decoration: none;
+        }
+
+        .logo img {
+            width: 28px;
+            height: 28px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+        }
+
+        .nav-links a {
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 60px;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero h1 {
+            font-size: 52px;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            letter-spacing: -0.02em;
+        }
+
+        .hero h1 span {
+            color: var(--primary);
+        }
+
+        .hero-description {
+            font-size: 19px;
+            color: var(--muted);
+            margin-bottom: 32px;
+            line-height: 1.6;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 40px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            font-size: 15px;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 10px;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background: #3d7bc4;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(74, 144, 217, 0.3);
+        }
+
+        .btn-secondary {
+            background: var(--card);
+            color: var(--foreground);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-light);
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .tech-badges {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        .badge-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .badge-dot.tauri { background: #FFC131; }
+        .badge-dot.rust { background: #DEA584; }
+        .badge-dot.react { background: #61DAFB; }
+
+        /* App Preview - macOS Window */
+        .app-preview {
+            position: relative;
+        }
+
+        .macos-window {
+            background: var(--card);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+            box-shadow:
+                0 2px 8px rgba(0, 0, 0, 0.04),
+                0 12px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        .window-titlebar {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            background: linear-gradient(180deg, #fafafa 0%, #f5f5f5 100%);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .traffic-lights {
+            display: flex;
+            gap: 8px;
+        }
+
+        .traffic-light {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .traffic-light.red { background: var(--accent-red); }
+        .traffic-light.yellow { background: var(--accent-yellow); }
+        .traffic-light.green { background: var(--accent-green); }
+
+        .window-title {
+            flex: 1;
+            text-align: center;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--muted);
+        }
+
+        .window-content {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            min-height: 320px;
+        }
+
+        .sidebar {
+            background: #fafafa;
+            border-right: 1px solid var(--border);
+            padding: 12px;
+        }
+
+        .sidebar-section {
+            margin-bottom: 16px;
+        }
+
+        .sidebar-title {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 4px 8px;
+            margin-bottom: 4px;
+        }
+
+        .sidebar-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 8px;
+            border-radius: 6px;
+            font-size: 13px;
+            color: var(--foreground);
+        }
+
+        .sidebar-item.active {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        .sidebar-item .icon {
+            width: 14px;
+            height: 14px;
+            opacity: 0.7;
+        }
+
+        .main-panel {
+            padding: 12px;
+        }
+
+        .commit-list {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .commit-row {
+            display: grid;
+            grid-template-columns: 24px 60px 1fr 70px;
+            gap: 12px;
+            align-items: center;
+            padding: 8px;
+            border-radius: 6px;
+            font-size: 13px;
+        }
+
+        .commit-row:hover {
+            background: var(--primary-light);
+        }
+
+        .commit-row.selected {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        .commit-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin: 0 auto;
+        }
+
+        .commit-dot.main { background: var(--primary); }
+        .commit-dot.feature { background: var(--accent-green); }
+        .commit-dot.hotfix { background: var(--accent-red); }
+
+        .commit-hash {
+            font-family: 'SF Mono', Monaco, monospace;
+            font-size: 11px;
+            color: var(--primary);
+        }
+
+        .commit-row.selected .commit-hash {
+            color: rgba(255,255,255,0.8);
+        }
+
+        .commit-msg {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .commit-time {
+            font-size: 11px;
+            color: var(--muted);
+            text-align: right;
+        }
+
+        .commit-row.selected .commit-time {
+            color: rgba(255,255,255,0.7);
+        }
+
+        /* Features */
+        .features {
+            padding: 100px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 56px;
+        }
+
+        .section-header h2 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            letter-spacing: -0.02em;
+        }
+
+        .section-header p {
+            font-size: 18px;
+            color: var(--muted);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .feature-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 28px;
+            transition: all 0.2s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+            border-color: var(--primary);
+        }
+
+        .feature-icon {
+            width: 44px;
+            height: 44px;
+            background: var(--primary-light);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            margin-bottom: 16px;
+        }
+
+        .feature-card h3 {
+            font-size: 17px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .feature-card p {
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        /* Download */
+        .download {
+            padding: 100px 0;
+            text-align: center;
+            background: var(--card);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .download h2 {
+            font-size: 40px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+
+        .download > p {
+            font-size: 18px;
+            color: var(--muted);
+            margin-bottom: 40px;
+        }
+
+        .download-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .btn-download {
+            display: inline-flex;
+            align-items: center;
+            gap: 14px;
+            padding: 16px 28px;
+            background: var(--background);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            color: var(--foreground);
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .btn-download:hover {
+            border-color: var(--primary);
+            background: var(--primary-light);
+        }
+
+        .btn-download.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .btn-download.disabled:hover {
+            border-color: var(--border);
+            background: var(--background);
+        }
+
+        .btn-download .os-icon {
+            font-size: 28px;
+        }
+
+        .btn-download .os-info {
+            text-align: left;
+        }
+
+        .btn-download .os-info small {
+            display: block;
+            font-size: 11px;
+            color: var(--muted);
+        }
+
+        .btn-download .os-info strong {
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .version-note {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        /* Footer */
+        footer {
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 28px;
+            margin-bottom: 20px;
+        }
+
+        .footer-links a {
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .copyright {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero h1 {
+                font-size: 40px;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .tech-badges {
+                justify-content: center;
+            }
+
+            .app-preview {
+                order: -1;
+            }
+
+            .window-content {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                display: none;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .download-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .section-header h2 {
+                font-size: 28px;
+            }
+
+            .download h2 {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <div class="nav-content">
+                <a href="#" class="logo">
+                    <img src="icon.png" alt="Git Client">
+                    <span>Git Client</span>
+                </a>
+                <div class="nav-links">
+                    <a href="#features">Features</a>
+                    <a href="#download">Download</a>
+                    <a href="https://github.com/lucidmaj7/gitclient-gui">GitHub</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Git made <span>simple</span> and <span>beautiful</span></h1>
+                    <p class="hero-description">
+                        A lightweight, native Git client with a clean macOS-inspired interface.
+                        Built with Rust for blazing fast performance.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="#download" class="btn btn-primary">Download Free</a>
+                        <a href="https://github.com/lucidmaj7/gitclient-gui" class="btn btn-secondary">View on GitHub</a>
+                    </div>
+                    <div class="tech-badges">
+                        <span class="badge">
+                            <span class="badge-dot tauri"></span>
+                            Tauri v2
+                        </span>
+                        <span class="badge">
+                            <span class="badge-dot rust"></span>
+                            Rust
+                        </span>
+                        <span class="badge">
+                            <span class="badge-dot react"></span>
+                            React 19
+                        </span>
+                    </div>
+                </div>
+                <div class="app-preview">
+                    <div class="macos-window">
+                        <div class="window-titlebar">
+                            <div class="traffic-lights">
+                                <span class="traffic-light red"></span>
+                                <span class="traffic-light yellow"></span>
+                                <span class="traffic-light green"></span>
+                            </div>
+                            <span class="window-title">my-project</span>
+                            <div style="width: 52px;"></div>
+                        </div>
+                        <div class="window-content">
+                            <div class="sidebar">
+                                <div class="sidebar-section">
+                                    <div class="sidebar-title">Branches</div>
+                                    <div class="sidebar-item active">
+                                        <span class="icon">*</span>
+                                        main
+                                    </div>
+                                    <div class="sidebar-item">
+                                        <span class="icon"></span>
+                                        feature/auth
+                                    </div>
+                                    <div class="sidebar-item">
+                                        <span class="icon"></span>
+                                        develop
+                                    </div>
+                                </div>
+                                <div class="sidebar-section">
+                                    <div class="sidebar-title">Tags</div>
+                                    <div class="sidebar-item">
+                                        <span class="icon"></span>
+                                        v1.0.0
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="main-panel">
+                                <div class="commit-list">
+                                    <div class="commit-row selected">
+                                        <span class="commit-dot main"></span>
+                                        <span class="commit-hash">a1b2c3d</span>
+                                        <span class="commit-msg">Merge feature/auth into main</span>
+                                        <span class="commit-time">2h ago</span>
+                                    </div>
+                                    <div class="commit-row">
+                                        <span class="commit-dot feature"></span>
+                                        <span class="commit-hash">e4f5g6h</span>
+                                        <span class="commit-msg">Add OAuth2 authentication</span>
+                                        <span class="commit-time">3h ago</span>
+                                    </div>
+                                    <div class="commit-row">
+                                        <span class="commit-dot feature"></span>
+                                        <span class="commit-hash">i7j8k9l</span>
+                                        <span class="commit-msg">Implement login flow</span>
+                                        <span class="commit-time">5h ago</span>
+                                    </div>
+                                    <div class="commit-row">
+                                        <span class="commit-dot main"></span>
+                                        <span class="commit-hash">m0n1o2p</span>
+                                        <span class="commit-msg">Update dependencies</span>
+                                        <span class="commit-time">1d ago</span>
+                                    </div>
+                                    <div class="commit-row">
+                                        <span class="commit-dot hotfix"></span>
+                                        <span class="commit-hash">q3r4s5t</span>
+                                        <span class="commit-msg">Fix critical security issue</span>
+                                        <span class="commit-time">2d ago</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>Everything you need</h2>
+                <p>Powerful Git features in a clean, intuitive interface</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Native Performance</h3>
+                    <p>Built with Rust and git2-rs for instant operations. No Electron overhead.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌳</div>
+                    <h3>Visual Commit Graph</h3>
+                    <p>See your history as a beautiful graph. Understand branches at a glance.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📂</div>
+                    <h3>Multi-Repository</h3>
+                    <p>Work on multiple repos simultaneously. Each opens in its own window.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔀</div>
+                    <h3>Smart Staging</h3>
+                    <p>Stage files, hunks, or lines. Full control over every commit.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🏷️</div>
+                    <h3>Tags & Stashes</h3>
+                    <p>Create tags, manage stashes. All your Git workflows in one place.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔧</div>
+                    <h3>Conflict Resolution</h3>
+                    <p>Built-in 3-way merge viewer. Resolve conflicts without the CLI.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="download" class="download">
+        <div class="container">
+            <h2>Ready to get started?</h2>
+            <p>Download Git Client for free. Open source and cross-platform.</p>
+            <div class="download-buttons">
+                <a href="Git Client_0.1.0_aarch64.dmg.zip" class="btn-download" download>
+                    <span class="os-icon">🍎</span>
+                    <span class="os-info">
+                        <small>Download for</small>
+                        <strong>macOS (Apple Silicon)</strong>
+                    </span>
+                </a>
+                <span class="btn-download disabled">
+                    <span class="os-icon">🪟</span>
+                    <span class="os-info">
+                        <small>Coming Soon</small>
+                        <strong>Windows</strong>
+                    </span>
+                </span>
+                <span class="btn-download disabled">
+                    <span class="os-icon">🐧</span>
+                    <span class="os-info">
+                        <small>Coming Soon</small>
+                        <strong>Linux</strong>
+                    </span>
+                </span>
+            </div>
+            <p class="version-note">Version 0.1.0 · Free & Open Source</p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="https://github.com/lucidmaj7/gitclient-gui">GitHub</a>
+                <a href="privacy.html">Privacy</a>
+                <a href="/">lucidmaj7's Apps</a>
+            </div>
+            <p class="copyright">&copy; 2025 lucidmaj7. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
