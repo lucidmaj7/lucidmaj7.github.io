@@ -1,0 +1,309 @@
+/* ==========================================================================
+   App Page — Hero, Features, Screenshots, Stats, CTA, Steps, Badges
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   App Hero
+   -------------------------------------------------------------------------- */
+.app-hero {
+  padding: 160px 0 96px;
+}
+
+.app-hero__inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-8);
+  align-items: center;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-3);
+}
+
+.app-hero__label {
+  display: inline-block;
+  font-size: var(--font-size-label);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-label);
+  text-transform: uppercase;
+  color: var(--color-app-accent);
+  margin-bottom: var(--space-2);
+}
+
+.app-hero__title {
+  font-size: var(--font-size-hero);
+  font-weight: var(--font-weight-black);
+  line-height: var(--line-height-heading);
+  letter-spacing: var(--letter-spacing-hero);
+}
+
+.app-hero__tagline {
+  font-size: 20px;
+  color: var(--color-text-sub);
+  line-height: 1.5;
+  margin: var(--space-2) 0 var(--space-4);
+  max-width: 520px;
+}
+
+.app-hero__actions {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.app-hero__visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.app-hero__icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 18px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  object-fit: cover;
+}
+
+/* --------------------------------------------------------------------------
+   App Features — uses .feature-grid from components.css
+   -------------------------------------------------------------------------- */
+.app-features {
+  padding: var(--space-section) 0;
+  background: var(--color-surface);
+}
+
+.app-features__inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-3);
+}
+
+/* --------------------------------------------------------------------------
+   App Showcase Section — Screenshots
+   -------------------------------------------------------------------------- */
+.app-showcase-section {
+  padding: var(--space-section) 0;
+}
+
+.app-showcase-section__inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-3);
+}
+
+.screenshot-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-3);
+  margin-top: var(--space-6);
+}
+
+.screenshot-grid--centered {
+  grid-template-columns: 1fr;
+  max-width: var(--max-width-narrow);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.screenshot-grid img {
+  width: 100%;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* --------------------------------------------------------------------------
+   App Stats
+   -------------------------------------------------------------------------- */
+.app-stats {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-8);
+  padding: var(--space-8) var(--space-3);
+}
+
+.app-stats__item {
+  text-align: center;
+}
+
+.app-stats__value {
+  font-size: 48px;
+  font-weight: var(--font-weight-black);
+  line-height: 1;
+  color: var(--color-app-accent);
+  letter-spacing: -0.02em;
+}
+
+.app-stats__label {
+  display: block;
+  font-size: var(--font-size-label);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-label);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-top: var(--space-1);
+}
+
+/* --------------------------------------------------------------------------
+   App CTA
+   -------------------------------------------------------------------------- */
+.app-cta {
+  padding: var(--space-section) 0;
+  text-align: center;
+}
+
+.app-cta__inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-3);
+}
+
+.app-cta__title {
+  font-size: clamp(32px, 4vw, 56px);
+  font-weight: var(--font-weight-black);
+  line-height: var(--line-height-heading);
+  letter-spacing: var(--letter-spacing-hero);
+}
+
+.app-cta__subtitle {
+  font-size: var(--font-size-body);
+  color: var(--color-text-sub);
+  margin-top: var(--space-2);
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.app-cta .btn {
+  margin-top: var(--space-3);
+}
+
+/* --------------------------------------------------------------------------
+   App Steps — Numbered Process Steps
+   -------------------------------------------------------------------------- */
+.app-steps {
+  max-width: var(--max-width-narrow);
+  margin: 0 auto;
+  padding: 0 var(--space-3);
+}
+
+.app-steps__item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-4) 0;
+}
+
+.app-steps__item + .app-steps__item {
+  border-top: 1px solid var(--color-border);
+}
+
+.app-steps__number {
+  font-size: 48px;
+  font-weight: var(--font-weight-black);
+  line-height: 1;
+  color: var(--color-app-accent);
+  flex-shrink: 0;
+  min-width: 60px;
+  letter-spacing: -0.02em;
+}
+
+.app-steps__content {
+  padding-top: 6px;
+}
+
+.app-steps__title {
+  font-size: 18px;
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.3;
+  margin-bottom: var(--space-1);
+  letter-spacing: -0.01em;
+}
+
+.app-steps__desc {
+  font-size: 15px;
+  color: var(--color-text-sub);
+  line-height: 1.55;
+}
+
+/* --------------------------------------------------------------------------
+   Badge Group — Tech Stack
+   -------------------------------------------------------------------------- */
+.badge-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 16px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-sub);
+  white-space: nowrap;
+}
+
+/* --------------------------------------------------------------------------
+   Responsive — Mobile
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .app-hero {
+    padding: 120px 0 64px;
+  }
+
+  .app-hero__inner {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+    text-align: center;
+  }
+
+  .app-hero__tagline {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .app-hero__actions {
+    justify-content: center;
+  }
+
+  .app-hero__visual {
+    order: -1;
+  }
+
+  .app-features,
+  .app-showcase-section,
+  .app-cta {
+    padding: var(--space-8) 0;
+  }
+
+  .feature-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .screenshot-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .app-stats {
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .app-stats__value {
+    font-size: 36px;
+  }
+
+  .app-steps__item {
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .app-steps__number {
+    font-size: 36px;
+    min-width: auto;
+  }
+}
