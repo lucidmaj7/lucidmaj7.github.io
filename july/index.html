@@ -1,116 +1,113 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>July - 당신의 새로운 경험</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-        }
-        header {
-            background-image: url("images/header-bg.jpg");
-            color: white;
-            text-align: center;
-            padding: 40px 0; /* 패딩을 늘려 헤더 높이 확대 */
-            background-size: cover;
-        }
-        header h1 {
-            display :none ;
-        }
-        header img {
-            width: 100px;
-            height: 100px;
-            border-radius: 16px;
-            margin-bottom: 10px;
-        }
-        section {
-            padding: 20px;
-            max-width: 800px;
-            margin: auto;
-        }
-        .features {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-        .feature {
-            flex: 1;
-            min-width: 200px;
-            padding: 10px;
-            background: #f9f9f9;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            text-align: center;
-        }
-        .feature img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-            margin-top: 10px;
-        }
-        footer {
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 10px 0;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="July - Capture moments with the beauty of analog film filters. A simple, elegant film camera app.">
+  <title>July - Film-Inspired Photos</title>
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <link rel="stylesheet" href="../css/app-page.css">
+  <style>:root { --color-app-accent: #F97316; }</style>
 </head>
 <body>
-    <header>
-        <img src="images/app-icon.png" alt="July 앱 아이콘">
-        <h1>July</h1>
-        <p>심플하게 만나는 감성 필터 카메라</p>
-    </header>
 
-    <section>
-        <h2>July</h2>
-        <p>July는 당신의 순간을 특별하게 담아주는 카메라 앱입니다. 다양한 아날로그 필터들이 포함되어 있어, 촬영하는 모든 사진에 빈티지하고 감성적인 느낌을 더할 수 있습니다. 사진을 찍고, 즉시 필터를 적용하여 독특한 분위기를 연출할 수 있습니다. 쉽고 직관적인 인터페이스로 누구나 간편하게 사용할 수 있으며, 당신의 추억을 더욱 아름답게 만들어줍니다.
-        </p>
-    </section>
+  <!-- NAV -->
+  <nav class="site-nav">
+    <div class="site-nav__inner">
+      <a href="../" class="site-nav__back">lucidmaj7</a>
+      <span class="site-nav__app-name">July</span>
+    </div>
+  </nav>
 
-    <section>
-        <h2>주요 기능</h2>
-        <div class="features">
-            <div class="feature">
-            
-                <h3>손쉬운 필터</h3>
-                <p>다양한 감성 필터를 손쉽게 적용하세요.</p>
-                <img src="images/app1.jpeg">
-            </div>
-            <div class="feature">
-                <h3>기존 사진 적용</h3>
-                <p>사진작가의 감성을 내 사진에 담아보세요.</p>
-                <img src="images/app2.jpeg">
-            </div>
-            <div class="feature">
-                <h3>익숙한 UX</h3>
-                <p>항상 쓰던 카메라처럼 익숙한 UI로 편안하게.</p>
-                <img src="images/app3.jpeg">
-            </div>
+  <!-- HERO -->
+  <section class="app-hero">
+    <div class="app-hero__inner">
+      <div class="app-hero__content">
+        <span class="app-hero__label">July</span>
+        <h1 class="app-hero__title" data-kinetic>Film-Inspired Photos</h1>
+        <p class="app-hero__tagline">Capture moments with the beauty of analog film filters. A simple, elegant camera app that makes every photo special.</p>
+        <div class="app-hero__actions">
+          <a href="https://apps.apple.com/kr/app/moment-july-%EA%B0%90%EC%84%B1-%ED%95%84%ED%84%B0-%EC%B9%B4%EB%A9%94%EB%9D%BC/id1448199130"
+             class="btn btn--accent btn--large"
+             target="_blank"
+             rel="noopener noreferrer">
+            Download on the App Store
+          </a>
         </div>
-    </section>
-    <section>
-        <h2>개인정보보호처리방침</h2>
-        <a href="privacy-en.html" target="_blank" style="text-decoration: none;">
-            개인정보보호처리방침
-        </a>
-    </section>
-    <section>
-        <h2>다운로드</h2>
-        <p>지금 바로 앱 스토어에서 다운로드하세요!</p>
-        <a href="https://apps.apple.com/kr/app/moment-july-%EA%B0%90%EC%84%B1-%ED%95%84%ED%84%B0-%EC%B9%B4%EB%A9%94%EB%9D%BC/id1448199130" target="_blank" style="text-decoration: none;">
-            <button style="padding: 10px 20px; font-size: 16px; background-color: #4CAF50; color: white; border: none; border-radius: 8px; cursor: pointer;">
-                앱스토어에서 다운로드
-            </button>
-        </a>
-    </section>
+      </div>
+      <div class="app-hero__visual">
+        <img src="images/app-icon.png" alt="July app icon" class="app-hero__icon" loading="lazy">
+      </div>
+    </div>
+  </section>
 
-    <footer>
-        <p>&copy; 2024 lucidmaj7 (c) All rights reserved.</p>
-    </footer>
+  <!-- FEATURES -->
+  <section class="app-features reveal">
+    <div class="app-features__inner">
+      <div class="section-header">
+        <span class="section-header__label">Features</span>
+        <h2 class="section-header__title">Key Features</h2>
+      </div>
+      <div class="feature-grid reveal--stagger">
+        <div class="feature-card">
+          <div class="feature-card__icon">&#127757;</div>
+          <h3 class="feature-card__title">Easy Filters</h3>
+          <p class="feature-card__desc">Apply various analog film filters effortlessly. From vintage warmth to cool monochromes.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-card__icon">&#128247;</div>
+          <h3 class="feature-card__title">Apply to Existing Photos</h3>
+          <p class="feature-card__desc">Add a photographer's touch to your existing photos. Transform any moment into art.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-card__icon">&#10024;</div>
+          <h3 class="feature-card__title">Familiar UX</h3>
+          <p class="feature-card__desc">A comfortable camera interface you're used to. Shoot naturally, filter instantly.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SHOWCASE -->
+  <section class="app-showcase-section reveal">
+    <div class="app-showcase-section__inner">
+      <div class="section-header">
+        <span class="section-header__label">Screenshots</span>
+        <h2 class="section-header__title">See It in Action</h2>
+      </div>
+      <div class="screenshot-grid" style="grid-template-columns: repeat(3, 1fr);">
+        <img src="images/app1.jpeg" alt="July app screenshot 1" loading="lazy">
+        <img src="images/app2.jpeg" alt="July app screenshot 2" loading="lazy">
+        <img src="images/app3.jpeg" alt="July app screenshot 3" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="app-cta reveal">
+    <div class="app-cta__inner">
+      <h2 class="app-cta__title">Capture Your Moments</h2>
+      <p class="app-cta__subtitle">Download July and start creating beautiful photos today.</p>
+      <a href="https://apps.apple.com/kr/app/moment-july-%EA%B0%90%EC%84%B1-%ED%95%84%ED%84%B0-%EC%B9%B4%EB%A9%94%EB%9D%BC/id1448199130"
+         class="btn btn--accent btn--large"
+         target="_blank"
+         rel="noopener noreferrer">
+        Download on the App Store
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <a href="privacy-en.html" class="site-footer__link">Privacy Policy</a>
+      &nbsp;&middot;&nbsp;
+      &copy; 2025 July
+    </div>
+  </footer>
+
+  <script src="../js/site.js"></script>
 </body>
 </html>

@@ -1,0 +1,295 @@
+/* ==========================================================================
+   Main Page — Plus X / 변사범 Style
+   Bold typography, massive whitespace, dramatic contrast
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Divider — Thin horizontal line between sections
+   -------------------------------------------------------------------------- */
+.divider {
+  border: none;
+  height: 1px;
+  background: var(--color-border);
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+/* --------------------------------------------------------------------------
+   Main Hero — Full viewport, dramatic type
+   -------------------------------------------------------------------------- */
+.main-hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100svh;
+  text-align: center;
+  padding: 80px var(--space-3) var(--space-8);
+  position: relative;
+}
+
+/* Label above hero */
+.main-hero__label {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-3);
+}
+
+/* Accent line */
+.main-hero__line {
+  width: 48px;
+  height: 1px;
+  background: var(--color-text);
+  margin-bottom: var(--space-5);
+}
+
+/* Title — extra massive */
+.main-hero__title {
+  font-size: clamp(64px, 10vw, 120px);
+  font-weight: var(--font-weight-black);
+  line-height: 1.0;
+  letter-spacing: -0.04em;
+  max-width: 900px;
+}
+
+.main-hero__subtitle {
+  font-size: clamp(16px, 1.5vw, 20px);
+  color: var(--color-text-sub);
+  max-width: 480px;
+  margin-top: var(--space-4);
+  line-height: 1.7;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 1s ease 0.3s, transform 1s ease 0.3s;
+}
+
+.main-hero__subtitle.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Scroll indicator */
+.main-hero__scroll {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.main-hero__scroll-line {
+  width: 1px;
+  height: 48px;
+  background: var(--color-text-muted);
+  animation: scrollLine 2s ease-in-out infinite;
+}
+
+.main-hero__scroll-text {
+  font-size: 10px;
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+/* --------------------------------------------------------------------------
+   App Showcase — Giant number watermark + content
+   -------------------------------------------------------------------------- */
+.app-showcase {
+  padding: 96px 0;
+}
+
+.app-showcase__inner {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-8);
+  align-items: center;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-3);
+}
+
+/* Reverse layout */
+.app-showcase__inner--reverse {
+  direction: rtl;
+}
+
+.app-showcase__inner--reverse > * {
+  direction: ltr;
+}
+
+/* Giant watermark number */
+.app-showcase__number {
+  position: absolute;
+  top: 50%;
+  left: var(--space-3);
+  transform: translateY(-50%);
+  font-size: clamp(120px, 18vw, 220px);
+  font-weight: var(--font-weight-black);
+  line-height: 1;
+  letter-spacing: -0.05em;
+  color: var(--color-surface);
+  z-index: 0;
+  user-select: none;
+  pointer-events: none;
+}
+
+.app-showcase__inner--reverse .app-showcase__number {
+  left: auto;
+  right: var(--space-3);
+}
+
+/* Content */
+.app-showcase__content {
+  position: relative;
+  z-index: 1;
+}
+
+.app-showcase__name {
+  font-size: clamp(48px, 6vw, 80px);
+  font-weight: var(--font-weight-black);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  margin-bottom: var(--space-3);
+}
+
+.app-showcase__desc {
+  font-size: clamp(15px, 1.2vw, 17px);
+  color: var(--color-text-sub);
+  line-height: var(--line-height-body);
+  margin-bottom: var(--space-4);
+  max-width: 380px;
+}
+
+/* Explore link — bold with arrow */
+.app-showcase__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: var(--font-weight-bold);
+  font-size: 15px;
+  color: var(--color-text);
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  position: relative;
+}
+
+.app-showcase__link::after {
+  content: '\2192';
+  font-size: 20px;
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+
+.app-showcase__link:hover::after {
+  transform: translateX(6px);
+}
+
+.app-showcase__link::before {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: calc(100% - 28px);
+  height: 2px;
+  background: var(--color-text);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--duration-normal) var(--ease-out);
+}
+
+.app-showcase__link:hover::before {
+  transform: scaleX(1);
+}
+
+/* Visual — app icon area */
+.app-showcase__visual {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1;
+  background: var(--color-surface);
+  border-radius: 24px;
+}
+
+.app-showcase__icon {
+  width: 140px;
+  height: 140px;
+  border-radius: 32px;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.08);
+  transition: transform 0.6s var(--ease-out);
+}
+
+.app-showcase:hover .app-showcase__icon {
+  transform: scale(1.08) translateY(-4px);
+}
+
+/* --------------------------------------------------------------------------
+   Responsive
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .main-hero {
+    min-height: 85vh;
+    padding-bottom: 100px;
+  }
+
+  .main-hero__scroll {
+    bottom: 24px;
+  }
+
+  .app-showcase {
+    padding: 64px 0;
+  }
+
+  .app-showcase__inner {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+    text-align: center;
+  }
+
+  .app-showcase__inner--reverse {
+    direction: ltr;
+  }
+
+  .app-showcase__number {
+    position: static;
+    transform: none;
+    font-size: 80px;
+    color: var(--color-border);
+    margin-bottom: -24px;
+  }
+
+  .app-showcase__inner--reverse .app-showcase__number {
+    left: auto;
+    right: auto;
+  }
+
+  .app-showcase__desc {
+    max-width: none;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .app-showcase__visual {
+    max-width: 280px;
+    margin: 0 auto;
+    order: -1;
+  }
+
+  .app-showcase__icon {
+    width: 100px;
+    height: 100px;
+    border-radius: 24px;
+  }
+}

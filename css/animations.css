@@ -1,0 +1,133 @@
+/* ==========================================================================
+   Animations — Keyframes, Scroll Reveal, Kinetic Typography
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Keyframes
+   -------------------------------------------------------------------------- */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scrollLine {
+  0% {
+    transform: scaleY(0);
+    transform-origin: top;
+  }
+  50% {
+    transform: scaleY(1);
+    transform-origin: top;
+  }
+  50.1% {
+    transform-origin: bottom;
+  }
+  100% {
+    transform: scaleY(0);
+    transform-origin: bottom;
+  }
+}
+
+@keyframes underlineGrow {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Scroll Reveal
+   -------------------------------------------------------------------------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Staggered children — each successive child delays an additional 0.1s */
+.reveal--stagger > *:nth-child(1) { transition-delay: 0s; }
+.reveal--stagger > *:nth-child(2) { transition-delay: 0.1s; }
+.reveal--stagger > *:nth-child(3) { transition-delay: 0.2s; }
+.reveal--stagger > *:nth-child(4) { transition-delay: 0.3s; }
+.reveal--stagger > *:nth-child(5) { transition-delay: 0.4s; }
+.reveal--stagger > *:nth-child(6) { transition-delay: 0.5s; }
+
+/* --------------------------------------------------------------------------
+   Kinetic Typography — Hero Word Animation
+   -------------------------------------------------------------------------- */
+.hero-word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.hero-word.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* --------------------------------------------------------------------------
+   Typewriter Effect
+   -------------------------------------------------------------------------- */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+[data-typewriter] {
+  position: relative;
+}
+
+.typewriter-cursor {
+  display: inline-block;
+  width: 3px;
+  height: 0.85em;
+  background: var(--color-text);
+  margin-left: 4px;
+  vertical-align: baseline;
+  animation: blink 0.8s step-end infinite;
+}
+
+.typewriter-cursor--hidden {
+  opacity: 0;
+  animation: none;
+}
+
+/* --------------------------------------------------------------------------
+   Reduced Motion — Accessibility
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .hero-word {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
