@@ -432,11 +432,32 @@
   font-size: clamp(38px, 5vw, 62px);
 }
 
-.cron-privacy__inner > div:last-child > p:last-child {
+.cron-privacy__inner > div:last-child > p:last-of-type {
   max-width: 680px;
   margin-top: 20px;
   color: var(--color-text-sub);
   line-height: 1.7;
+}
+
+.cron-privacy__link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-top: 22px;
+  color: var(--cron-blue);
+  font-size: 14px;
+  font-weight: var(--font-weight-bold);
+}
+
+.cron-privacy__link::after {
+  content: '\2192';
+  margin-left: 8px;
+  transition: transform 160ms ease;
+}
+
+.cron-privacy__link:hover::after,
+.cron-privacy__link:focus-visible::after {
+  transform: translateX(4px);
 }
 
 .cron-cta {
