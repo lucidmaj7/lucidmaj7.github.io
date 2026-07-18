@@ -510,6 +510,12 @@
   align-items: center;
 }
 
+.cron-footer__links {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
 @media (max-width: 960px) {
   .cron-hero__inner {
     grid-template-columns: 1fr 340px;
