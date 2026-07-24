@@ -1,0 +1,920 @@
+:root {
+  --netstate-bg: #0C0D0C;
+  --netstate-surface: #151615;
+  --netstate-surface-muted: #1B1C1A;
+  --netstate-separator: #2A2C29;
+  --netstate-ivory: #F2F1EB;
+  --netstate-paper: #E9E8E1;
+  --netstate-secondary: #9B9D97;
+  --netstate-mint: #6DD6B0;
+  --netstate-wifi: #73CFF2;
+  --netstate-cellular: #78D991;
+  --netstate-warning: #E6B15A;
+  --netstate-max: 1240px;
+}
+
+.netstate-page {
+  color: var(--netstate-ivory);
+  background: var(--netstate-bg);
+}
+
+.netstate-page .site-nav,
+.netstate-policy-page .site-nav {
+  color: var(--netstate-ivory);
+}
+
+.netstate-page .site-nav__back,
+.netstate-page .site-nav__app-name,
+.netstate-policy-page .site-nav__back,
+.netstate-policy-page .site-nav__app-name {
+  color: var(--netstate-ivory);
+}
+
+.netstate-page .site-nav__back:hover,
+.netstate-policy-page .site-nav__back:hover {
+  color: var(--netstate-mint);
+}
+
+.netstate-page .site-nav--scrolled,
+.netstate-policy-page .site-nav--scrolled {
+  background: rgba(12, 13, 12, 0.88);
+  box-shadow: 0 1px 0 rgba(242, 241, 235, 0.1);
+}
+
+.netstate-page a:focus-visible,
+.netstate-policy-page a:focus-visible {
+  outline: 3px solid var(--netstate-mint);
+  outline-offset: 4px;
+}
+
+.netstate-section {
+  width: min(100% - 48px, var(--netstate-max));
+  margin: 0 auto;
+}
+
+.netstate-section__header {
+  max-width: 760px;
+  margin-bottom: 72px;
+}
+
+.netstate-section__label {
+  margin-bottom: 18px;
+  color: #437B68;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.netstate-section__header h2,
+.netstate-details h2,
+.netstate-privacy h2,
+.netstate-contact h2,
+.netstate-cta h2 {
+  font-size: clamp(42px, 5.8vw, 76px);
+  font-weight: 600;
+  line-height: 0.98;
+  letter-spacing: -0.055em;
+}
+
+.netstate-section__header > p:last-child {
+  margin-top: 24px;
+  color: #5E605C;
+  font-size: clamp(17px, 1.6vw, 20px);
+  line-height: 1.55;
+}
+
+.netstate-section__header--dark .netstate-section__label,
+.netstate-privacy .netstate-section__label,
+.netstate-contact .netstate-section__label {
+  color: var(--netstate-mint);
+}
+
+.netstate-section__header--dark > p:last-child {
+  color: var(--netstate-secondary);
+}
+
+/* Hero */
+.netstate-hero {
+  position: relative;
+  min-height: 900px;
+  padding: 132px 32px 92px;
+  overflow: hidden;
+  background: var(--netstate-bg);
+}
+
+.netstate-hero__rule {
+  position: absolute;
+  top: 60px;
+  bottom: 0;
+  left: calc(50% + 146px);
+  width: 1px;
+  background: var(--netstate-separator);
+}
+
+.netstate-hero__inner {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.18fr) minmax(360px, 0.82fr);
+  align-items: center;
+  gap: clamp(64px, 8vw, 132px);
+  width: min(100%, var(--netstate-max));
+  min-height: 680px;
+  margin: 0 auto;
+}
+
+.netstate-hero__content {
+  position: relative;
+  z-index: 1;
+}
+
+.netstate-hero__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 54px;
+  color: var(--netstate-secondary);
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.netstate-hero__brand img {
+  width: 56px;
+  height: 56px;
+  border: 1px solid var(--netstate-separator);
+  border-radius: 14px;
+}
+
+.netstate-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  color: var(--netstate-secondary);
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.netstate-eyebrow span {
+  width: 8px;
+  height: 8px;
+  background: var(--netstate-wifi);
+  border-radius: 50%;
+}
+
+.netstate-hero__title {
+  max-width: 780px;
+  font-size: clamp(66px, 8vw, 112px);
+  font-weight: 600;
+  line-height: 0.88;
+  letter-spacing: -0.065em;
+}
+
+.netstate-hero__title em {
+  color: var(--netstate-mint);
+  font-style: normal;
+}
+
+.netstate-hero__tagline {
+  max-width: 650px;
+  margin-top: 36px;
+  color: var(--netstate-secondary);
+  font-size: clamp(17px, 1.55vw, 20px);
+  line-height: 1.6;
+}
+
+.netstate-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 36px;
+}
+
+.netstate-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  padding: 14px 22px;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.2;
+  transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.netstate-btn:hover {
+  transform: translateY(-2px);
+}
+
+.netstate-btn--primary {
+  color: var(--netstate-bg);
+  background: var(--netstate-mint);
+}
+
+.netstate-btn--primary:hover {
+  background: #83E3C0;
+}
+
+.netstate-btn--ghost {
+  color: var(--netstate-ivory);
+  border-color: var(--netstate-separator);
+  background: var(--netstate-surface);
+}
+
+.netstate-btn--ghost:hover {
+  border-color: #494C47;
+  background: var(--netstate-surface-muted);
+}
+
+.netstate-btn--dark {
+  color: var(--netstate-ivory);
+  background: var(--netstate-bg);
+}
+
+.netstate-btn--dark:hover {
+  background: #222420;
+}
+
+.netstate-hero__meta {
+  margin-top: 20px;
+  color: #747771;
+  font-size: 14px;
+}
+
+.netstate-hero__visual {
+  position: relative;
+  z-index: 1;
+  justify-self: end;
+  width: min(100%, 410px);
+}
+
+.netstate-phone {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #343631;
+  border-radius: 56px;
+  background: #000;
+}
+
+.netstate-phone img {
+  width: 100%;
+  height: auto;
+}
+
+.netstate-hero__caption {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  margin-top: 18px;
+  color: var(--netstate-secondary);
+  font-size: 14px;
+}
+
+.netstate-hero__caption span {
+  color: var(--netstate-mint);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Facts */
+.netstate-facts {
+  border-top: 1px solid var(--netstate-separator);
+  border-bottom: 1px solid var(--netstate-separator);
+  background: var(--netstate-surface);
+}
+
+.netstate-facts__inner {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  width: min(100%, var(--netstate-max));
+  margin: 0 auto;
+}
+
+.netstate-facts li {
+  min-height: 154px;
+  padding: 38px 28px;
+  border-left: 1px solid var(--netstate-separator);
+}
+
+.netstate-facts li:last-child {
+  border-right: 1px solid var(--netstate-separator);
+}
+
+.netstate-facts strong,
+.netstate-facts span {
+  display: block;
+}
+
+.netstate-facts strong {
+  color: var(--netstate-ivory);
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.netstate-facts span {
+  margin-top: 8px;
+  color: var(--netstate-secondary);
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+/* Features */
+.netstate-features {
+  padding: 136px 0;
+  color: var(--netstate-bg);
+  background: var(--netstate-ivory);
+}
+
+.netstate-feature-list {
+  border-top: 1px solid #C9C9C1;
+}
+
+.netstate-feature-list li {
+  display: grid;
+  grid-template-columns: 72px minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 32px;
+  padding: 38px 0 42px;
+  border-bottom: 1px solid #C9C9C1;
+}
+
+.netstate-feature-list__number {
+  color: #71736E;
+  font: 500 14px/1.3 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+.netstate-feature-list h3 {
+  margin-bottom: 10px;
+  font-size: clamp(26px, 3vw, 38px);
+  font-weight: 500;
+  letter-spacing: -0.035em;
+}
+
+.netstate-feature-list p {
+  max-width: 700px;
+  color: #62645F;
+  font-size: 17px;
+  line-height: 1.55;
+}
+
+.netstate-feature-list__signal {
+  min-width: 98px;
+  text-align: right;
+  font: 500 34px/1 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  letter-spacing: 0;
+}
+
+.netstate-feature-list__signal--wifi {
+  color: #259FD0;
+}
+
+.netstate-feature-list__signal--cellular,
+.netstate-feature-list__signal--refresh {
+  color: #3A9D78;
+}
+
+/* Product gallery */
+.netstate-showcase {
+  padding: 136px 0 148px;
+  border-bottom: 1px solid var(--netstate-separator);
+  background: var(--netstate-bg);
+}
+
+.netstate-gallery {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.netstate-gallery__item {
+  min-width: 0;
+}
+
+.netstate-gallery__item img {
+  width: 100%;
+  border: 1px solid var(--netstate-separator);
+  border-radius: 28px;
+  background: #000;
+}
+
+.netstate-gallery__item:nth-child(even) {
+  padding-top: 72px;
+}
+
+.netstate-gallery figcaption {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  margin-top: 18px;
+  color: var(--netstate-secondary);
+  font-size: 14px;
+}
+
+.netstate-gallery figcaption span {
+  color: var(--netstate-mint);
+  font: 500 13px/1.4 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+/* Details */
+.netstate-details {
+  padding: 136px 0;
+  color: var(--netstate-bg);
+  background: var(--netstate-paper);
+}
+
+.netstate-details__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(460px, 1.1fr);
+  align-items: start;
+  gap: clamp(72px, 10vw, 150px);
+}
+
+.netstate-details .netstate-section__header {
+  margin-bottom: 0;
+}
+
+.netstate-data-sheet {
+  border-top: 1px solid #BFC0B8;
+}
+
+.netstate-data-sheet div {
+  display: grid;
+  grid-template-columns: 150px minmax(0, 1fr);
+  gap: 28px;
+  padding: 24px 0;
+  border-bottom: 1px solid #BFC0B8;
+}
+
+.netstate-data-sheet dt {
+  color: #6A6C67;
+  font-size: 15px;
+}
+
+.netstate-data-sheet dd {
+  color: var(--netstate-bg);
+  font: 500 17px/1.45 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+/* Privacy */
+.netstate-privacy {
+  padding: 118px 32px;
+  border-bottom: 1px solid var(--netstate-separator);
+  background: var(--netstate-surface);
+}
+
+.netstate-privacy__inner {
+  display: grid;
+  grid-template-columns: 240px minmax(0, 840px);
+  align-items: center;
+  gap: clamp(60px, 9vw, 140px);
+  width: min(100%, 1080px);
+  margin: 0 auto;
+}
+
+.netstate-privacy__mark {
+  position: relative;
+  width: 208px;
+  height: 122px;
+}
+
+.netstate-privacy__mark::before,
+.netstate-privacy__mark::after,
+.netstate-privacy__mark span {
+  content: "";
+  position: absolute;
+  top: 13px;
+  border: 13px solid var(--netstate-wifi);
+  border-right: 0;
+  border-top-color: transparent;
+  border-bottom-color: transparent;
+  border-radius: 50% 0 0 50%;
+}
+
+.netstate-privacy__mark::before {
+  left: 0;
+  width: 74px;
+  height: 96px;
+}
+
+.netstate-privacy__mark::after {
+  left: 28px;
+  top: 30px;
+  width: 47px;
+  height: 63px;
+}
+
+.netstate-privacy__mark span {
+  left: 55px;
+  top: 47px;
+  width: 22px;
+  height: 30px;
+}
+
+.netstate-privacy__mark i {
+  position: absolute;
+  top: 55px;
+  left: 80px;
+  width: 72px;
+  height: 12px;
+  background: var(--netstate-ivory);
+}
+
+.netstate-privacy__mark i::before {
+  content: "";
+  position: absolute;
+  top: -8px;
+  left: 29px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--netstate-ivory);
+}
+
+.netstate-privacy__mark b {
+  position: absolute;
+  right: 0;
+  bottom: 10px;
+  width: 16px;
+  height: 42px;
+  border-radius: 8px;
+  background: var(--netstate-mint);
+  box-shadow: -25px 16px 0 var(--netstate-mint), -50px 30px 0 var(--netstate-mint);
+}
+
+.netstate-privacy h2 {
+  max-width: 780px;
+}
+
+.netstate-privacy p:not(.netstate-section__label) {
+  margin-top: 28px;
+  color: var(--netstate-secondary);
+  font-size: 18px;
+  line-height: 1.65;
+}
+
+.netstate-text-link {
+  display: inline-block;
+  margin-top: 28px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid var(--netstate-mint);
+  color: var(--netstate-mint);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.netstate-text-link:hover {
+  color: #8AE4C2;
+  border-color: #8AE4C2;
+}
+
+/* Contact */
+.netstate-contact {
+  padding: 112px 32px;
+  background: var(--netstate-bg);
+}
+
+.netstate-contact__inner {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 64px;
+  width: min(100%, var(--netstate-max));
+  margin: 0 auto;
+}
+
+.netstate-contact h2 {
+  font-size: clamp(40px, 5vw, 68px);
+}
+
+.netstate-contact p:not(.netstate-section__label) {
+  margin-top: 24px;
+  color: var(--netstate-secondary);
+  font-size: 17px;
+}
+
+.netstate-contact__button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: 0 0 370px;
+  min-height: 82px;
+  padding: 20px 26px;
+  border: 1px solid var(--netstate-separator);
+  border-radius: 16px;
+  color: var(--netstate-ivory);
+  font-size: 16px;
+  font-weight: 600;
+  transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.netstate-contact__button span:last-child {
+  color: var(--netstate-mint);
+  font-size: 24px;
+  transition: transform 0.2s ease;
+}
+
+.netstate-contact__button:hover {
+  border-color: #464943;
+  background: var(--netstate-surface);
+}
+
+.netstate-contact__button:hover span:last-child {
+  transform: translateX(5px);
+}
+
+/* Final CTA */
+.netstate-cta {
+  padding: 124px 32px;
+  color: var(--netstate-bg);
+  text-align: center;
+  background: var(--netstate-ivory);
+}
+
+.netstate-cta__inner {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.netstate-cta img {
+  width: 104px;
+  height: 104px;
+  margin: 0 auto 30px;
+  border-radius: 25px;
+}
+
+.netstate-cta .netstate-section__label {
+  color: #437B68;
+}
+
+.netstate-cta p:not(.netstate-section__label) {
+  margin: 24px auto 30px;
+  color: #5E605C;
+  font-size: 18px;
+}
+
+.netstate-footer {
+  border-color: var(--netstate-separator);
+  color: #6F726C;
+  background: var(--netstate-bg);
+}
+
+.netstate-footer .site-footer__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.netstate-footer__links {
+  display: flex;
+  gap: 24px;
+}
+
+.netstate-footer .site-footer__link {
+  color: var(--netstate-secondary);
+}
+
+.netstate-footer .site-footer__link:hover {
+  color: var(--netstate-ivory);
+}
+
+@media (max-width: 1050px) {
+  .netstate-hero__rule {
+    left: 61%;
+  }
+
+  .netstate-hero__inner {
+    grid-template-columns: minmax(0, 1fr) 340px;
+    gap: 56px;
+  }
+
+  .netstate-hero__title {
+    font-size: clamp(58px, 8vw, 82px);
+  }
+
+  .netstate-facts__inner {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .netstate-facts li:nth-child(3) {
+    border-top: 1px solid var(--netstate-separator);
+  }
+
+  .netstate-facts li:nth-child(4) {
+    border-top: 1px solid var(--netstate-separator);
+    border-right: 1px solid var(--netstate-separator);
+  }
+
+  .netstate-gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-width: 760px;
+    margin: 0 auto;
+    gap: 38px 24px;
+  }
+
+  .netstate-gallery__item:nth-child(even) {
+    padding-top: 52px;
+  }
+
+  .netstate-details__inner {
+    grid-template-columns: 1fr;
+    gap: 60px;
+  }
+
+  .netstate-details .netstate-section__header {
+    max-width: 780px;
+  }
+}
+
+@media (max-width: 760px) {
+  .netstate-section {
+    width: min(100% - 40px, var(--netstate-max));
+  }
+
+  .netstate-section__header {
+    margin-bottom: 48px;
+  }
+
+  .netstate-section__header h2,
+  .netstate-details h2,
+  .netstate-privacy h2,
+  .netstate-contact h2,
+  .netstate-cta h2 {
+    font-size: clamp(38px, 12vw, 54px);
+    line-height: 1.02;
+  }
+
+  .netstate-hero {
+    min-height: 0;
+    padding: 112px 20px 72px;
+  }
+
+  .netstate-hero__rule {
+    display: none;
+  }
+
+  .netstate-hero__inner {
+    grid-template-columns: 1fr;
+    gap: 64px;
+    min-height: 0;
+  }
+
+  .netstate-hero__brand {
+    margin-bottom: 40px;
+  }
+
+  .netstate-hero__title {
+    font-size: clamp(54px, 17.5vw, 78px);
+    line-height: 0.92;
+  }
+
+  .netstate-hero__tagline {
+    margin-top: 28px;
+    font-size: 17px;
+  }
+
+  .netstate-hero__actions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .netstate-btn {
+    width: 100%;
+  }
+
+  .netstate-hero__meta {
+    line-height: 1.5;
+  }
+
+  .netstate-hero__visual {
+    justify-self: center;
+    width: min(100%, 390px);
+  }
+
+  .netstate-phone {
+    border-radius: 46px;
+  }
+
+  .netstate-facts__inner {
+    margin: 0 20px;
+    width: auto;
+  }
+
+  .netstate-facts li {
+    min-height: 132px;
+    padding: 28px 18px;
+  }
+
+  .netstate-facts li:nth-child(odd) {
+    border-left: 1px solid var(--netstate-separator);
+  }
+
+  .netstate-facts strong {
+    font-size: 16px;
+  }
+
+  .netstate-features,
+  .netstate-showcase,
+  .netstate-details {
+    padding: 92px 0;
+  }
+
+  .netstate-feature-list li {
+    grid-template-columns: 42px minmax(0, 1fr);
+    gap: 18px;
+    padding: 30px 0 34px;
+  }
+
+  .netstate-feature-list__signal {
+    display: none;
+  }
+
+  .netstate-feature-list h3 {
+    font-size: 28px;
+  }
+
+  .netstate-feature-list p {
+    font-size: 16px;
+  }
+
+  .netstate-gallery {
+    display: flex;
+    width: calc(100% + 20px);
+    max-width: none;
+    margin-right: -20px;
+    gap: 16px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .netstate-gallery::-webkit-scrollbar {
+    display: none;
+  }
+
+  .netstate-gallery__item,
+  .netstate-gallery__item:nth-child(even) {
+    flex: 0 0 min(76vw, 330px);
+    padding-top: 0;
+    scroll-snap-align: start;
+  }
+
+  .netstate-gallery__item img {
+    border-radius: 24px;
+  }
+
+  .netstate-data-sheet div {
+    grid-template-columns: 112px minmax(0, 1fr);
+    gap: 18px;
+  }
+
+  .netstate-data-sheet dd {
+    font-size: 15px;
+  }
+
+  .netstate-privacy {
+    padding: 88px 20px;
+  }
+
+  .netstate-privacy__inner {
+    grid-template-columns: 1fr;
+    gap: 46px;
+  }
+
+  .netstate-privacy__mark {
+    transform: scale(0.8);
+    transform-origin: left center;
+  }
+
+  .netstate-privacy p:not(.netstate-section__label) {
+    font-size: 17px;
+  }
+
+  .netstate-contact {
+    padding: 88px 20px;
+  }
+
+  .netstate-contact__inner {
+    display: grid;
+    gap: 44px;
+  }
+
+  .netstate-contact__button {
+    width: 100%;
+    flex-basis: auto;
+  }
+
+  .netstate-cta {
+    padding: 92px 20px;
+  }
+
+  .netstate-footer .site-footer__inner {
+    flex-direction: column;
+    gap: 18px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .netstate-btn:hover {
+    transform: none;
+  }
+}

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="NetState is a widget-first network utility for iPhone. See your Wi-Fi SSID, local IP, and LTE or 5G status directly from your Home Screen.">
+  <meta name="keywords" content="Wi-Fi widget, SSID, local IP, network status, LTE, 5G, DNS, gateway, iPhone widget">
+  <meta name="theme-color" content="#0C0D0C">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="NetState — Your network. At a glance.">
+  <meta property="og:description" content="See your current Wi-Fi SSID, local IP, and LTE or 5G status from the iPhone Home Screen.">
+  <meta property="og:url" content="https://lucidmaj7.github.io/netstate/">
+  <meta property="og:image" content="https://lucidmaj7.github.io/netstate/images/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="NetState — Your network. At a glance.">
+  <meta name="twitter:description" content="Wi-Fi and cellular status, right on your iPhone Home Screen.">
+  <meta name="twitter:image" content="https://lucidmaj7.github.io/netstate/images/og.png">
+  <title>NetState — Wi-Fi and Cellular Widgets for iPhone</title>
+  <link rel="canonical" href="https://lucidmaj7.github.io/netstate/">
+  <link rel="icon" href="images/icon.png">
+  <link rel="apple-touch-icon" href="images/icon.png">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <link rel="stylesheet" href="netstate.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "WiFi Widget - NetState",
+    "operatingSystem": "iOS 17.0 or later",
+    "applicationCategory": "UtilitiesApplication",
+    "description": "A widget-first network utility for checking Wi-Fi SSID, local IP, and cellular status.",
+    "downloadUrl": "https://apps.apple.com/app/id1373212847",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+</head>
+<body class="netstate-page">
+
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="site-nav__inner">
+      <a href="../" class="site-nav__back">lucidmaj7</a>
+      <span class="site-nav__app-name">NetState</span>
+    </div>
+  </nav>
+
+  <main>
+    <section class="netstate-hero" aria-labelledby="netstate-title">
+      <div class="netstate-hero__rule" aria-hidden="true"></div>
+      <div class="netstate-hero__inner">
+        <div class="netstate-hero__content">
+          <div class="netstate-hero__brand">
+            <img src="images/icon.png" alt="" width="64" height="64">
+            <span>NetState for iPhone</span>
+          </div>
+          <p class="netstate-eyebrow"><span aria-hidden="true"></span> Wi-Fi &amp; cellular widgets</p>
+          <h1 id="netstate-title" class="netstate-hero__title">Your network.<br><em>At a glance.</em></h1>
+          <p class="netstate-hero__tagline">See your current Wi-Fi name and local IP, or know when you are on LTE or 5G. NetState keeps the essentials on your Home Screen and lets you refresh them with a tap.</p>
+          <div class="netstate-hero__actions">
+            <a href="https://apps.apple.com/app/id1373212847" class="netstate-btn netstate-btn--primary" target="_blank" rel="noopener noreferrer">Download on the App Store</a>
+            <a href="#features" class="netstate-btn netstate-btn--ghost">Explore features</a>
+          </div>
+          <p class="netstate-hero__meta">Free for iPhone &amp; iPad&nbsp;&nbsp; iOS 17 or later</p>
+        </div>
+
+        <div class="netstate-hero__visual" aria-label="NetState widgets on an iPhone Home Screen">
+          <div class="netstate-phone">
+            <img src="images/home-screen-widgets.png" alt="iPhone Home Screen showing NetState Small and Medium widgets with Studio WiFi and local IP address 192.168.0.12" width="1284" height="2778">
+          </div>
+          <p class="netstate-hero__caption"><span>01</span> Live on your Home Screen</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="netstate-facts" aria-label="NetState highlights">
+      <ul class="netstate-facts__inner" role="list">
+        <li><strong>Small + Medium</strong><span>Home Screen widgets</span></li>
+        <li><strong>SSID + local IP</strong><span>when connected to Wi-Fi</span></li>
+        <li><strong>LTE or 5G</strong><span>clear cellular status</span></li>
+        <li><strong>Zero lookup traffic</strong><span>for every network refresh</span></li>
+      </ul>
+    </section>
+
+    <section id="features" class="netstate-features reveal" aria-labelledby="features-title">
+      <div class="netstate-section">
+        <header class="netstate-section__header">
+          <p class="netstate-section__label">Only what matters</p>
+          <h2 id="features-title">Network answers.<br>One glance away.</h2>
+          <p>NetState is designed around the few details you actually need, without turning a quick network check into a dashboard.</p>
+        </header>
+
+        <ol class="netstate-feature-list reveal--stagger">
+          <li>
+            <span class="netstate-feature-list__number">01</span>
+            <div>
+              <h3>Know the Wi-Fi</h3>
+              <p>See the current SSID and local IPv4 address without digging through Settings or opening a network tool.</p>
+            </div>
+            <span class="netstate-feature-list__signal netstate-feature-list__signal--wifi" aria-hidden="true">◖◖◖</span>
+          </li>
+          <li>
+            <span class="netstate-feature-list__number">02</span>
+            <div>
+              <h3>Read cellular clearly</h3>
+              <p>When Wi-Fi drops away, the widget focuses on LTE or 5G instead of showing a confusing cellular interface address.</p>
+            </div>
+            <span class="netstate-feature-list__signal netstate-feature-list__signal--cellular" aria-hidden="true">▂▄▆</span>
+          </li>
+          <li>
+            <span class="netstate-feature-list__number">03</span>
+            <div>
+              <h3>Refresh when it matters</h3>
+              <p>Use the widget button to request the current connection immediately, with automatic updates scheduled by iOS.</p>
+            </div>
+            <span class="netstate-feature-list__signal netstate-feature-list__signal--refresh" aria-hidden="true">↻</span>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="netstate-showcase" aria-labelledby="showcase-title">
+      <div class="netstate-section">
+        <header class="netstate-section__header netstate-section__header--dark reveal">
+          <p class="netstate-section__label">Widget first</p>
+          <h2 id="showcase-title">At home on<br>your Home Screen.</h2>
+          <p>Choose the size that fits, refresh without opening the app, and open NetState only when you need the full interface details.</p>
+        </header>
+
+        <div class="netstate-gallery" aria-label="NetState app screenshots">
+          <figure class="netstate-gallery__item netstate-gallery__item--wide reveal">
+            <img src="images/home-screen-widgets.png" alt="NetState Medium and Small widgets placed on an iPhone Home Screen" width="1284" height="2778" loading="lazy">
+            <figcaption><span>01</span> Home Screen widgets</figcaption>
+          </figure>
+          <figure class="netstate-gallery__item reveal">
+            <img src="images/widget-guide.png" alt="NetState widget guide showing the Small and Medium widget sizes" width="1284" height="2778" loading="lazy">
+            <figcaption><span>02</span> Choose your size</figcaption>
+          </figure>
+          <figure class="netstate-gallery__item reveal">
+            <img src="images/network-status.png" alt="NetState Status screen showing SSID, IPv4, IPv6, gateway, subnet mask, and DNS" width="1284" height="2778" loading="lazy">
+            <figcaption><span>03</span> Full network details</figcaption>
+          </figure>
+          <figure class="netstate-gallery__item netstate-gallery__item--wide reveal">
+            <img src="images/widget-refresh-guide.png" alt="NetState widget installation and refresh guide" width="1284" height="2778" loading="lazy">
+            <figcaption><span>04</span> Add, place, refresh</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="netstate-details reveal" aria-labelledby="details-title">
+      <div class="netstate-section netstate-details__inner">
+        <header class="netstate-section__header">
+          <p class="netstate-section__label">When you need more</p>
+          <h2 id="details-title">The details stay<br>inside the app.</h2>
+          <p>The widget stays concise. NetState keeps the deeper interface values in one quiet, readable status sheet.</p>
+        </header>
+
+        <dl class="netstate-data-sheet">
+          <div><dt>Connection</dt><dd>Wi-Fi / LTE / 5G</dd></div>
+          <div><dt>Addresses</dt><dd>IPv4 + IPv6</dd></div>
+          <div><dt>Routing</dt><dd>Gateway + Subnet Mask</dd></div>
+          <div><dt>Name service</dt><dd>System DNS servers</dd></div>
+          <div><dt>Network tests</dt><dd>None during refresh</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section id="privacy" class="netstate-privacy reveal" aria-labelledby="privacy-title">
+      <div class="netstate-privacy__inner">
+        <div class="netstate-privacy__mark" aria-hidden="true">
+          <span></span><i></i><b></b>
+        </div>
+        <div>
+          <p class="netstate-section__label">Private by design</p>
+          <h2 id="privacy-title">Your network snapshot<br>stays on your device.</h2>
+          <p>NetState uses location permission only so iOS can provide the current Wi-Fi name. It does not read geographic coordinates, send SSID or IP values to the developer, run ping or speed tests, or place ads in widgets. A banner ad appears only in the main app Status screen.</p>
+          <a href="privacy-en.html" class="netstate-text-link">Read the Privacy Policy</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="netstate-contact reveal" aria-labelledby="contact-title">
+      <div class="netstate-contact__inner">
+        <div>
+          <p class="netstate-section__label">Support and feedback</p>
+          <h2 id="contact-title">Something about your<br>network look off?</h2>
+          <p>Send a bug report, feature idea, or a note about your device and connection. The contact form is the quickest way to reach us.</p>
+        </div>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfUtO-jReeFrbQ6bBdDyqD_oD5UfT75gS0Z0OXCbtzlIBw2yQ/viewform?usp=publish-editor" class="netstate-contact__button" target="_blank" rel="noopener noreferrer">
+          <span>Open Contact Form</span>
+          <span aria-hidden="true">&rarr;</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="netstate-cta reveal" aria-labelledby="cta-title">
+      <div class="netstate-cta__inner">
+        <img src="images/icon.png" alt="NetState app icon" width="112" height="112" loading="lazy">
+        <p class="netstate-section__label">NetState 2.0</p>
+        <h2 id="cta-title">Your connection.<br>Right where you need it.</h2>
+        <p>Add NetState to your Home Screen and make the next network check a glance, not a search.</p>
+        <a href="https://apps.apple.com/app/id1373212847" class="netstate-btn netstate-btn--dark" target="_blank" rel="noopener noreferrer">Download on the App Store</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer netstate-footer">
+    <div class="site-footer__inner">
+      <nav class="netstate-footer__links" aria-label="NetState links">
+        <a href="privacy-en.html" class="site-footer__link">Privacy Policy</a>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfUtO-jReeFrbQ6bBdDyqD_oD5UfT75gS0Z0OXCbtzlIBw2yQ/viewform?usp=publish-editor" class="site-footer__link" target="_blank" rel="noopener noreferrer">Contact</a>
+      </nav>
+      <p>&copy; 2026 lucidmaj7</p>
+    </div>
+  </footer>
+
+  <script src="../js/site.js"></script>
+</body>
+</html>
