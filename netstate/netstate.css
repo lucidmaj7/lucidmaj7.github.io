@@ -390,11 +390,24 @@
   min-width: 0;
 }
 
-.netstate-gallery__item img {
+.netstate-gallery__frame {
   width: 100%;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
   border: 1px solid var(--netstate-separator);
   border-radius: 28px;
   background: #000;
+}
+
+.netstate-gallery__frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.netstate-gallery__item--refresh .netstate-gallery__frame img {
+  object-position: center;
 }
 
 .netstate-gallery__item:nth-child(even) {
@@ -858,7 +871,7 @@
     scroll-snap-align: start;
   }
 
-  .netstate-gallery__item img {
+  .netstate-gallery__frame {
     border-radius: 24px;
   }
 
