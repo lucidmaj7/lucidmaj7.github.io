@@ -1,0 +1,357 @@
+.netstate-policy-page {
+  color: var(--netstate-bg);
+  background: var(--netstate-ivory);
+}
+
+.netstate-policy-hero {
+  padding: 138px 32px 98px;
+  border-bottom: 1px solid var(--netstate-separator);
+  color: var(--netstate-ivory);
+  background: var(--netstate-bg);
+}
+
+.netstate-policy-hero__inner {
+  width: min(100%, 1050px);
+  margin: 0 auto;
+}
+
+.netstate-policy-hero__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 70px;
+  color: var(--netstate-secondary);
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.netstate-policy-hero__brand img {
+  width: 56px;
+  height: 56px;
+  border: 1px solid var(--netstate-separator);
+  border-radius: 14px;
+}
+
+.netstate-policy-hero__eyebrow,
+.netstate-policy-label,
+.netstate-policy-nav > p {
+  color: #437B68;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.netstate-policy-hero__eyebrow {
+  color: var(--netstate-mint);
+}
+
+.netstate-policy-hero h1 {
+  margin-top: 18px;
+  font-size: clamp(60px, 8.5vw, 112px);
+  font-weight: 600;
+  line-height: 0.94;
+  letter-spacing: -0.06em;
+}
+
+.netstate-policy-hero__intro {
+  max-width: 780px;
+  margin-top: 34px;
+  color: var(--netstate-secondary);
+  font-size: clamp(18px, 2vw, 22px);
+  line-height: 1.58;
+}
+
+.netstate-policy-hero__date {
+  margin-top: 28px;
+  color: #747771;
+  font: 500 14px/1.4 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+.netstate-policy-layout {
+  display: grid;
+  grid-template-columns: 250px minmax(0, 760px);
+  align-items: start;
+  gap: clamp(70px, 9vw, 140px);
+  width: min(100% - 64px, 1120px);
+  margin: 0 auto;
+  padding: 112px 0 132px;
+}
+
+.netstate-policy-nav {
+  position: sticky;
+  top: 96px;
+  padding-top: 4px;
+}
+
+.netstate-policy-nav ol {
+  margin-top: 22px;
+  border-top: 1px solid #C9C9C1;
+}
+
+.netstate-policy-nav li {
+  border-bottom: 1px solid #C9C9C1;
+}
+
+.netstate-policy-nav a {
+  display: block;
+  padding: 13px 0;
+  color: #696B66;
+  font-size: 14px;
+  line-height: 1.35;
+  transition: color 0.2s ease, padding-left 0.2s ease;
+}
+
+.netstate-policy-nav a:hover,
+.netstate-policy-nav a:focus-visible {
+  padding-left: 5px;
+  color: #2B785D;
+}
+
+.netstate-policy-content > section {
+  padding: 76px 0;
+  border-top: 1px solid #C9C9C1;
+  scroll-margin-top: 88px;
+}
+
+.netstate-policy-content > section:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.netstate-policy-label {
+  margin-bottom: 14px;
+}
+
+.netstate-policy-content h2 {
+  margin-bottom: 26px;
+  font-size: clamp(34px, 4vw, 50px);
+  font-weight: 600;
+  line-height: 1.02;
+  letter-spacing: -0.045em;
+}
+
+.netstate-policy-content p,
+.netstate-policy-content li {
+  color: #555752;
+  font-size: 17px;
+  line-height: 1.72;
+}
+
+.netstate-policy-content p + p {
+  margin-top: 18px;
+}
+
+.netstate-policy-content ul:not(.netstate-policy-contact) {
+  display: grid;
+  gap: 10px;
+  margin: 22px 0;
+}
+
+.netstate-policy-content ul:not(.netstate-policy-contact) li {
+  position: relative;
+  padding-left: 22px;
+}
+
+.netstate-policy-content ul:not(.netstate-policy-contact) li::before {
+  content: "";
+  position: absolute;
+  top: 0.73em;
+  left: 0;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #3A9D78;
+}
+
+.netstate-policy-content strong {
+  color: var(--netstate-bg);
+  font-weight: 600;
+}
+
+.netstate-policy-content a {
+  color: #2B785D;
+  text-decoration: underline;
+  text-decoration-color: rgba(43, 120, 93, 0.35);
+  text-underline-offset: 4px;
+}
+
+.netstate-policy-content a:hover,
+.netstate-policy-content a:focus-visible {
+  text-decoration-color: currentColor;
+}
+
+.netstate-policy-summary {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  margin-top: 42px;
+  border: 1px solid #C9C9C1;
+  background: #C9C9C1;
+}
+
+.netstate-policy-summary div {
+  min-height: 150px;
+  padding: 24px;
+  background: var(--netstate-paper);
+}
+
+.netstate-policy-summary strong,
+.netstate-policy-summary span {
+  display: block;
+}
+
+.netstate-policy-summary strong {
+  color: #2B785D;
+  font-size: 16px;
+}
+
+.netstate-policy-summary span {
+  margin-top: 12px;
+  color: #696B66;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.netstate-policy-callout {
+  margin: 30px 0;
+  padding: 24px 26px;
+  border-left: 4px solid var(--netstate-mint);
+  background: var(--netstate-paper);
+}
+
+.netstate-policy-callout > strong {
+  display: block;
+  color: #266E54;
+  font-size: 17px;
+}
+
+.netstate-policy-callout p {
+  margin-top: 8px;
+  font-size: 16px;
+}
+
+.netstate-policy-links a::after {
+  content: " ↗";
+  display: inline;
+  text-decoration: none;
+}
+
+.netstate-policy-contact {
+  display: grid;
+  gap: 8px;
+  margin-top: 22px;
+}
+
+.netstate-policy-footer {
+  border-color: var(--netstate-separator);
+  color: #6F726C;
+  background: var(--netstate-bg);
+}
+
+.netstate-policy-footer .site-footer__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.netstate-policy-footer__links {
+  display: flex;
+  gap: 24px;
+}
+
+.netstate-policy-footer .site-footer__link {
+  color: var(--netstate-secondary);
+}
+
+.netstate-policy-footer .site-footer__link:hover {
+  color: var(--netstate-ivory);
+}
+
+@media (max-width: 900px) {
+  .netstate-policy-layout {
+    grid-template-columns: 1fr;
+    gap: 64px;
+  }
+
+  .netstate-policy-nav {
+    position: static;
+  }
+
+  .netstate-policy-nav ol {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .netstate-policy-nav li:nth-child(odd) {
+    padding-right: 24px;
+  }
+
+  .netstate-policy-nav li:nth-child(even) {
+    padding-left: 24px;
+    border-left: 1px solid #C9C9C1;
+  }
+}
+
+@media (max-width: 640px) {
+  .netstate-policy-hero {
+    padding: 112px 20px 72px;
+  }
+
+  .netstate-policy-hero__brand {
+    margin-bottom: 52px;
+  }
+
+  .netstate-policy-hero h1 {
+    font-size: clamp(54px, 16vw, 76px);
+  }
+
+  .netstate-policy-hero__intro {
+    font-size: 17px;
+  }
+
+  .netstate-policy-layout {
+    width: calc(100% - 40px);
+    padding: 78px 0 96px;
+  }
+
+  .netstate-policy-nav ol {
+    grid-template-columns: 1fr;
+  }
+
+  .netstate-policy-nav li:nth-child(odd),
+  .netstate-policy-nav li:nth-child(even) {
+    padding-right: 0;
+    padding-left: 0;
+    border-left: 0;
+  }
+
+  .netstate-policy-content > section {
+    padding: 58px 0;
+  }
+
+  .netstate-policy-content h2 {
+    font-size: 36px;
+  }
+
+  .netstate-policy-content p,
+  .netstate-policy-content li {
+    font-size: 16px;
+  }
+
+  .netstate-policy-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .netstate-policy-summary div {
+    min-height: 0;
+  }
+
+  .netstate-policy-callout {
+    padding: 22px 20px;
+  }
+
+  .netstate-policy-footer .site-footer__inner {
+    flex-direction: column;
+    gap: 18px;
+  }
+}
